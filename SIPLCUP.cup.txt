@@ -1,16 +1,15 @@
 //adapted from CUP man page http://cs.princeton.edu/~appel/manual/java/CUP/manual.htm
 import java_cup.runtime.*;
 
-init with{: scaner.init();  :};
-scan with{: return scanner.nex_token();  :};
+init with {: scaner.init();  :};
+scan with {: return scanner.nex_token();  :};
 
-terminal		 MINUS, PLUS, MULTIPLY, DIVIDE, EQ, LPAREN, RPAREN
-terminal		 EQEQ, LTHAN, GTHAN, LTHANEQ, GTHANEQ, NOTEQ
-terminal		 SEMI
-terminal		 TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT, NOT, OR, OUTPUT, THEN, VAR, WHILE
-terminal	String	 NUMBER
-terminal	Integer	 NUMBER
+terminal            MINUS, PLUS, MULTIPLY, DIVIDE, EQ, LPAREN, RPAREN;
+terminal            EQEQ, LTHAN, GTHAN, LTHANEQ, GTHANEQ, NOTEQ;
+terminal            SEMI;
+terminal            TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT, NOT, OR, OUTPUT, THEN, VAR, WHILE;
+terminal    String  NUMBER;
 
+non terminal expr;
 
-
-
+expr ::= NUMBER | NUMBER expr;

@@ -28,7 +28,7 @@ class SIPL {
 %notunix
 
 %%
-<YYINITIAL> [\ \r\n\t\b]* {System.out.println("whitespace found");}
+<YYINITIAL> [\ \r\n\t\b]+ {System.out.println("whitespace found");}
 
 <YYINITIAL> "(" {System.out.println("right bracet found");
 		return new Symbol(sym.LPAREN);
@@ -38,7 +38,7 @@ class SIPL {
 		return new Symbol(sym.RPAREN);
 
 }
-"-" {System.out.println("minus found")
+"-" {System.out.println("minus found");
      return new Symbol(sym.MINUS);
 }
 "+" {System.out.println("plus found");

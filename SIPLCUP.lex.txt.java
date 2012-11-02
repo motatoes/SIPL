@@ -1,24 +1,5 @@
 import java.io.FileInputStream;
-class Yytoken {
-	private lexeme type;
-	private String val;
-	public static enum lexeme {MINUS,PLUS,MULTIP,DIVIDE,SLASH,EQ,
-							   EQEQ,LTHAN,LTHANEQ,GTHAN,GTHANEQ,
-							   NOTEQ,SEMICOL,TRUE,FALSE,AND,BEGIN,DO,
-							   ELSE,END,IF,INPUT,NOT,OR,OUTPUT,THEN,
-							   VAR,WHILE,IDEN,INT,COMMENT
-							   };
-	public Yytoken(lexeme t, String v) {	
-		type = t;
-		val    = v;
-	}
-	public lexeme getType() {
-		return type;
-	}
-	public String getVal() {
-		return val;
-	}
-}
+import java.cup.runime.Symbol;
 class SIPL {
     public static void main(String argv[]) throws java.io.IOException {
 		FileInputStream in = null;
@@ -34,7 +15,7 @@ class SIPL {
 }
 
 
-class Yylex {
+class Yylex implements java_cup.runtime.Scanner {
 	private final int YY_BUFFER_SIZE = 512;
 	private final int YY_F = -1;
 	private final int YY_NO_STATE = -1;
@@ -88,7 +69,7 @@ class Yylex {
 	private final int DUMMY = 1;
 	private final int yy_state_dtrans[] = {
 		0,
-		46
+		42
 	};
 	private void yybegin (int state) {
 		yy_lexical_state = state;
@@ -277,17 +258,17 @@ class Yylex {
 		/* 33 */ YY_NO_ANCHOR,
 		/* 34 */ YY_NO_ANCHOR,
 		/* 35 */ YY_NO_ANCHOR,
-		/* 36 */ YY_NO_ANCHOR,
-		/* 37 */ YY_NOT_ACCEPT,
+		/* 36 */ YY_NOT_ACCEPT,
+		/* 37 */ YY_NO_ANCHOR,
 		/* 38 */ YY_NO_ANCHOR,
-		/* 39 */ YY_NO_ANCHOR,
-		/* 40 */ YY_NOT_ACCEPT,
+		/* 39 */ YY_NOT_ACCEPT,
+		/* 40 */ YY_NO_ANCHOR,
 		/* 41 */ YY_NO_ANCHOR,
-		/* 42 */ YY_NO_ANCHOR,
-		/* 43 */ YY_NOT_ACCEPT,
+		/* 42 */ YY_NOT_ACCEPT,
+		/* 43 */ YY_NO_ANCHOR,
 		/* 44 */ YY_NO_ANCHOR,
 		/* 45 */ YY_NO_ANCHOR,
-		/* 46 */ YY_NOT_ACCEPT,
+		/* 46 */ YY_NO_ANCHOR,
 		/* 47 */ YY_NO_ANCHOR,
 		/* 48 */ YY_NO_ANCHOR,
 		/* 49 */ YY_NO_ANCHOR,
@@ -332,43 +313,40 @@ class Yylex {
 		/* 88 */ YY_NO_ANCHOR,
 		/* 89 */ YY_NO_ANCHOR,
 		/* 90 */ YY_NO_ANCHOR,
-		/* 91 */ YY_NO_ANCHOR,
-		/* 92 */ YY_NO_ANCHOR,
-		/* 93 */ YY_NO_ANCHOR
+		/* 91 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
-"32:8,33:2,37,32:2,1,32:18,33,12,32:6,2,3,6,5,32,4,32,7,35:10,8,13,10,9,11,3" +
-"2:2,36:26,32:4,34,32,19,24,36,23,17,18,25,29,26,36:2,20,36,22,27,28,36,15,2" +
-"1,14,16,30,31,36:3,32:5,0:2")[0];
+"32:8,33:2,1,32:2,1,32:18,33,12,32:6,2,3,6,5,32,4,32,7,35:10,8,13,10,9,11,32" +
+":2,36:26,32:4,34,32,19,24,36,23,17,18,25,29,26,36:2,20,36,22,27,28,36,15,21" +
+",14,16,30,31,36:3,32:5,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,94,
-"0,1:3,2:2,1,3,4,5,6,1,7,2,1:5,8:3,1,8:12,1,9,10,11,4,12,13,10,14,15,12,16,1" +
-"7,7,18,19,20,21,22,23,24,11,25,13,26,15,27,28,29,2,30,31,32,19,8,21,33,23,3" +
-"4,28,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,8,33,34,35")[0];
+	private int yy_rmap[] = unpackFromString(1,92,
+"0,1:3,2:2,1:2,3,4,5,1,6,2,1:5,7:15,1,8,9,10,3,11,12,9,13,14,11,15,6,16,17,1" +
+"8,19,20,21,22,10,23,12,24,14,25,26,27,2,28,29,30,17,7,19,31,21,32,26,33,34," +
+"35,36,37,38,39,40,41,42,43,44,45,46,47,7,31,32,33")[0];
 
-	private int yy_nxt[][] = unpackFromString(50,38,
-"1,36,2,3,4,5,6,7,8,37,9,10,40,11,12,90:2,68,91,70,90:2,72,38,92,90,41,44,90" +
-":2,74,93,-1,36,90,13,90,36,-1:73,13,-1:9,43,-1:39,14,-1:37,16,-1:37,17,-1:4" +
-"2,90,76,90:13,77,90:2,-1:3,90:2,-1:15,90:18,-1:3,90:2,-1:2,36,-1:31,36,-1:3" +
-",36,-1:9,15,-1:42,90:13,19,90:4,-1:3,90:2,-1:10,18,-1:42,90:4,20,90:3,81,90" +
-":9,-1:3,90:2,-1:2,22,43:36,-1:14,90,21,82,90:15,-1:3,90:2,-1,1,-1,35:2,4,5," +
-"6,7,39,42,9,10,45,11,48,69:2,50,71,52,69:2,54,56,73,69,58,60,69:2,62,75,35:" +
-"2,69,64,69,-1:15,90:9,23,90:8,-1:3,90:2,-1:15,90:9,24,90:8,-1:3,90:2,-1:15," +
-"90:6,78,90,47,90:9,-1:3,90:2,-1:15,25,90:17,-1:3,90:2,-1:15,90:8,49,90:9,-1" +
-":3,90:2,-1:15,90,26,90:16,-1:3,90:2,-1:15,90:13,51,90:4,-1:3,90:2,-1:15,90:" +
-"3,27,90:14,-1:3,90:2,-1:15,90:8,28,90:9,-1:3,90:2,-1:15,90:3,29,90:14,-1:3," +
-"90:2,-1:15,90:3,30,90:14,-1:3,90:2,-1:15,90:5,53,90:12,-1:3,90:2,-1:15,90:8" +
-",31,90:9,-1:3,90:2,-1:15,32,90:17,-1:3,90:2,-1:15,90:3,33,90:14,-1:3,90:2,-" +
-"1:15,34,90:17,-1:3,90:2,-1:15,90:5,79,90:12,-1:3,90:2,-1:15,90:3,80,90:14,-" +
-"1:3,90:2,-1:15,90:15,83,90:2,-1:3,90:2,-1:15,90:2,55,90:15,-1:3,90:2,-1:15," +
-"90:3,57,90:14,-1:3,90:2,-1:15,90:7,59,90:10,-1:3,90:2,-1:15,90:6,84,90:11,-" +
-"1:3,90:2,-1:15,90:11,85,90:6,-1:3,90:2,-1:15,90:14,86,90:3,-1:3,90:2,-1:15," +
-"87,90:17,-1:3,90:2,-1:15,90:12,88,90:5,-1:3,90:2,-1:15,90:7,61,90:10,-1:3,9" +
-"0:2,-1:15,90:12,63,90:5,-1:3,90:2,-1:15,90:2,65,90:15,-1:3,90:2,-1:15,90:14" +
-",89,90:3,-1:3,90:2,-1:15,90:6,66,90:11,-1:3,90:2,-1:15,90:2,67,90:15,-1:3,9" +
-"0:2,-1");
+	private int yy_nxt[][] = unpackFromString(48,37,
+"1,35,2,3,4,5,6,7,8,36,9,10,39,11,12,88:2,66,89,68,88:2,70,37,90,88,40,43,88" +
+":2,72,91,-1,35,88,13,88,-1:72,13,-1:10,14,-1:36,16,-1:36,17,-1:41,88,74,88:" +
+"13,75,88:2,-1:3,88:2,-1:14,88:18,-1:3,88:2,-1,35,-1:31,35,-1:12,15,-1:41,88" +
+":13,19,88:4,-1:3,88:2,-1:9,18,-1:41,88:4,20,88:3,79,88:9,-1:3,88:2,1,-1,34:" +
+"2,4,5,6,7,38,41,9,10,44,11,46,67:2,48,69,50,67:2,52,54,71,67,56,58,67:2,60," +
+"73,34:2,67,62,67,-1:14,88,21,80,88:15,-1:3,88:2,-1:14,88:9,22,88:8,-1:3,88:" +
+"2,-1:14,88:9,23,88:8,-1:3,88:2,-1:14,88:6,76,88,45,88:9,-1:3,88:2,-1:14,24," +
+"88:17,-1:3,88:2,-1:14,88:8,47,88:9,-1:3,88:2,-1:14,88,25,88:16,-1:3,88:2,-1" +
+":14,88:13,49,88:4,-1:3,88:2,-1:14,88:3,26,88:14,-1:3,88:2,-1:14,88:8,27,88:" +
+"9,-1:3,88:2,-1:14,88:3,28,88:14,-1:3,88:2,-1:14,88:3,29,88:14,-1:3,88:2,-1:" +
+"14,88:5,51,88:12,-1:3,88:2,-1:14,88:8,30,88:9,-1:3,88:2,-1:14,31,88:17,-1:3" +
+",88:2,-1:14,88:3,32,88:14,-1:3,88:2,-1:14,33,88:17,-1:3,88:2,-1:14,88:5,77," +
+"88:12,-1:3,88:2,-1:14,88:3,78,88:14,-1:3,88:2,-1:14,88:15,81,88:2,-1:3,88:2" +
+",-1:14,88:2,53,88:15,-1:3,88:2,-1:14,88:3,55,88:14,-1:3,88:2,-1:14,88:7,57," +
+"88:10,-1:3,88:2,-1:14,88:6,82,88:11,-1:3,88:2,-1:14,88:11,83,88:6,-1:3,88:2" +
+",-1:14,88:14,84,88:3,-1:3,88:2,-1:14,85,88:17,-1:3,88:2,-1:14,88:12,86,88:5" +
+",-1:3,88:2,-1:14,88:7,59,88:10,-1:3,88:2,-1:14,88:12,61,88:5,-1:3,88:2,-1:1" +
+"4,88:2,63,88:15,-1:3,88:2,-1:14,88:14,87,88:3,-1:3,88:2,-1:14,88:6,64,88:11" +
+",-1:3,88:2,-1:14,88:2,65,88:15,-1:3,88:2");
 
-	public Yytoken yylex ()
+	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
 		int yy_lookahead;
 		int yy_anchor = YY_NO_ANCHOR;
@@ -421,354 +399,368 @@ class Yylex {
 					case -3:
 						break;
 					case 2:
-						{System.out.println("right bracet found");}
+						{System.out.println("right bracet found");
+		return new Symbol(sym.LPAREN);
+}
 					case -4:
 						break;
 					case 3:
-						{System.out.println("left bracet found");}
+						{System.out.println("left bracet found");
+		return new Symbol(sym.RPAREN);
+}
 					case -5:
 						break;
 					case 4:
-						{System.out.println("minus found");return new Yytoken(Yytoken.lexeme.MINUS,"");}
+						{System.out.println("minus found");
+     return new Symbol(sym.MINUS);
+}
 					case -6:
 						break;
 					case 5:
-						{System.out.println("plus found");return new Yytoken(Yytoken.lexeme.PLUS,"");}
+						{System.out.println("plus found");
+     return new Symbol(sym.PLUS);
+}
 					case -7:
 						break;
 					case 6:
-						{System.out.println("multiply found");return new Yytoken(Yytoken.lexeme.MULTIP,"");}
+						{
+	System.out.println("multiply found");
+	return new Symbol(sym.MULTIPLY);
+}
 					case -8:
 						break;
 					case 7:
-						{System.out.println("divide found");return new Yytoken(Yytoken.lexeme.DIVIDE,"");}
+						{
+	System.out.println("divide found");
+	return new Symbol(sym.SEMI);
+}
 					case -9:
 						break;
 					case 9:
-						{System.out.println("less than found");return new Yytoken(Yytoken.lexeme.LTHAN,"");}
+						{
+	System.out.println("less than found");
+	return new Symbol(sym.SEMI);
+}
 					case -10:
 						break;
 					case 10:
-						{System.out.println("greater than found");return new Yytoken(Yytoken.lexeme.GTHAN,"");}
+						{System.out.println("greater than found");}
 					case -11:
 						break;
 					case 11:
-						{System.out.println("semicolon found");return new Yytoken(Yytoken.lexeme.SEMICOL,"");}
+						{System.out.println("semicolon found");}
 					case -12:
 						break;
 					case 12:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+						{System.out.println("identifier found");}
 					case -13:
 						break;
 					case 13:
-						{System.out.println("integer found");return new Yytoken(Yytoken.lexeme.INT,yytext());}
+						{System.out.println("integer found");}
 					case -14:
 						break;
 					case 14:
-						{System.out.println("equals found");return new Yytoken(Yytoken.lexeme.EQ,"");}
+						{
+	System.out.println("equals found");
+	return new Symbol(sym.EQ);
+}
 					case -15:
 						break;
 					case 15:
-						{System.out.println("equalequal found");return new Yytoken(Yytoken.lexeme.EQEQ,"");}
+						{System.out.println("equalequal found");}
 					case -16:
 						break;
 					case 16:
-						{System.out.println("less than or equals found");
-		return new Yytoken(Yytoken.lexeme.LTHANEQ,"");}
+						{System.out.println("less than or equals found");}
 					case -17:
 						break;
 					case 17:
-						{System.out.println("greater than or equals found");
-	  return new Yytoken(Yytoken.lexeme.GTHANEQ,"");}
+						{System.out.println("greater than or equals found");}
 					case -18:
 						break;
 					case 18:
-						{System.out.println("notequals found");return new Yytoken(Yytoken.lexeme.NOTEQ,"");}
+						{System.out.println("notequals found");}
 					case -19:
 						break;
 					case 19:
-						{System.out.println("do found");return new Yytoken(Yytoken.lexeme.DO,"");}
+						{System.out.println("do found");}
 					case -20:
 						break;
 					case 20:
-						{System.out.println("if found");return new Yytoken(Yytoken.lexeme.IF,"");}
+						{System.out.println("if found");}
 					case -21:
 						break;
 					case 21:
-						{System.out.println("or found");return new Yytoken(Yytoken.lexeme.OR,"");}
+						{System.out.println("or found");}
 					case -22:
 						break;
 					case 22:
-						{System.out.println("line comment found");return new Yytoken(Yytoken.lexeme.COMMENT,"");}
+						{System.out.println("end found");}
 					case -23:
 						break;
 					case 23:
-						{System.out.println("end found");return new Yytoken(Yytoken.lexeme.END,"");}
+						{System.out.println("and found");}
 					case -24:
 						break;
 					case 24:
-						{System.out.println("and found");return new Yytoken(Yytoken.lexeme.AND,"");}
+						{System.out.println("not found");}
 					case -25:
 						break;
 					case 25:
-						{System.out.println("not found");return new Yytoken(Yytoken.lexeme.NOT,"");}
+						{System.out.println("var found");}
 					case -26:
 						break;
 					case 26:
-						{System.out.println("var found");return new Yytoken(Yytoken.lexeme.VAR,"");}
+						{System.out.println("true found");}
 					case -27:
 						break;
 					case 27:
-						{System.out.println("true found");return new Yytoken(Yytoken.lexeme.TRUE,"");}
+						{System.out.println("then found");}
 					case -28:
 						break;
 					case 28:
-						{System.out.println("then found");return new Yytoken(Yytoken.lexeme.THEN,"");}
+						{System.out.println("else found");}
 					case -29:
 						break;
 					case 29:
-						{System.out.println("else found");return new Yytoken(Yytoken.lexeme.ELSE,"");}
+						{System.out.println("false found");}
 					case -30:
 						break;
 					case 30:
-						{System.out.println("false found");return new Yytoken(Yytoken.lexeme.FALSE,"");}
+						{System.out.println("begin found");}
 					case -31:
 						break;
 					case 31:
-						{System.out.println("begin found");return new Yytoken(Yytoken.lexeme.BEGIN,"");}
+						{System.out.println("input found");}
 					case -32:
 						break;
 					case 32:
-						{System.out.println("input found");return new Yytoken(Yytoken.lexeme.INPUT,"");}
+						{System.out.println("while found");}
 					case -33:
 						break;
 					case 33:
-						{System.out.println("while found");return new Yytoken(Yytoken.lexeme.WHILE,"");}
+						{System.out.println("output found");}
 					case -34:
 						break;
 					case 34:
-						{System.out.println("output found");return new Yytoken(Yytoken.lexeme.OUTPUT,"");}
+						{/*next pattern matches identifiers*/}
 					case -35:
 						break;
 					case 35:
-						{/*next pattern matches identifiers*/}
+						{System.out.println("whitespace found");}
 					case -36:
 						break;
-					case 36:
-						{System.out.println("whitespace found");}
+					case 37:
+						{System.out.println("identifier found");}
 					case -37:
 						break;
 					case 38:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+						{/*next pattern matches identifiers*/}
 					case -38:
 						break;
-					case 39:
-						{/*next pattern matches identifiers*/}
+					case 40:
+						{System.out.println("identifier found");}
 					case -39:
 						break;
 					case 41:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+						{/*next pattern matches identifiers*/}
 					case -40:
 						break;
-					case 42:
-						{/*next pattern matches identifiers*/}
+					case 43:
+						{System.out.println("identifier found");}
 					case -41:
 						break;
 					case 44:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+						{/*next pattern matches identifiers*/}
 					case -42:
 						break;
 					case 45:
-						{/*next pattern matches identifiers*/}
+						{System.out.println("identifier found");}
 					case -43:
 						break;
-					case 47:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 46:
+						{/*next pattern matches identifiers*/}
 					case -44:
+						break;
+					case 47:
+						{System.out.println("identifier found");}
+					case -45:
 						break;
 					case 48:
 						{/*next pattern matches identifiers*/}
-					case -45:
+					case -46:
 						break;
 					case 49:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -46:
+						{System.out.println("identifier found");}
+					case -47:
 						break;
 					case 50:
 						{/*next pattern matches identifiers*/}
-					case -47:
+					case -48:
 						break;
 					case 51:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -48:
+						{System.out.println("identifier found");}
+					case -49:
 						break;
 					case 52:
 						{/*next pattern matches identifiers*/}
-					case -49:
+					case -50:
 						break;
 					case 53:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -50:
+						{System.out.println("identifier found");}
+					case -51:
 						break;
 					case 54:
 						{/*next pattern matches identifiers*/}
-					case -51:
+					case -52:
 						break;
 					case 55:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -52:
+						{System.out.println("identifier found");}
+					case -53:
 						break;
 					case 56:
 						{/*next pattern matches identifiers*/}
-					case -53:
+					case -54:
 						break;
 					case 57:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -54:
+						{System.out.println("identifier found");}
+					case -55:
 						break;
 					case 58:
 						{/*next pattern matches identifiers*/}
-					case -55:
+					case -56:
 						break;
 					case 59:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -56:
+						{System.out.println("identifier found");}
+					case -57:
 						break;
 					case 60:
 						{/*next pattern matches identifiers*/}
-					case -57:
+					case -58:
 						break;
 					case 61:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -58:
+						{System.out.println("identifier found");}
+					case -59:
 						break;
 					case 62:
 						{/*next pattern matches identifiers*/}
-					case -59:
-						break;
-					case 63:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
 					case -60:
 						break;
-					case 64:
-						{/*next pattern matches identifiers*/}
+					case 63:
+						{System.out.println("identifier found");}
 					case -61:
 						break;
-					case 65:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 64:
+						{System.out.println("identifier found");}
 					case -62:
 						break;
-					case 66:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 65:
+						{System.out.println("identifier found");}
 					case -63:
 						break;
-					case 67:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 66:
+						{System.out.println("identifier found");}
 					case -64:
 						break;
-					case 68:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 67:
+						{/*next pattern matches identifiers*/}
 					case -65:
+						break;
+					case 68:
+						{System.out.println("identifier found");}
+					case -66:
 						break;
 					case 69:
 						{/*next pattern matches identifiers*/}
-					case -66:
+					case -67:
 						break;
 					case 70:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -67:
+						{System.out.println("identifier found");}
+					case -68:
 						break;
 					case 71:
 						{/*next pattern matches identifiers*/}
-					case -68:
+					case -69:
 						break;
 					case 72:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -69:
+						{System.out.println("identifier found");}
+					case -70:
 						break;
 					case 73:
 						{/*next pattern matches identifiers*/}
-					case -70:
-						break;
-					case 74:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
 					case -71:
 						break;
-					case 75:
-						{/*next pattern matches identifiers*/}
+					case 74:
+						{System.out.println("identifier found");}
 					case -72:
 						break;
-					case 76:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 75:
+						{System.out.println("identifier found");}
 					case -73:
 						break;
-					case 77:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 76:
+						{System.out.println("identifier found");}
 					case -74:
 						break;
-					case 78:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 77:
+						{System.out.println("identifier found");}
 					case -75:
 						break;
-					case 79:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 78:
+						{System.out.println("identifier found");}
 					case -76:
 						break;
-					case 80:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 79:
+						{System.out.println("identifier found");}
 					case -77:
 						break;
-					case 81:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 80:
+						{System.out.println("identifier found");}
 					case -78:
 						break;
-					case 82:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 81:
+						{System.out.println("identifier found");}
 					case -79:
 						break;
-					case 83:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 82:
+						{System.out.println("identifier found");}
 					case -80:
 						break;
-					case 84:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 83:
+						{System.out.println("identifier found");}
 					case -81:
 						break;
-					case 85:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 84:
+						{System.out.println("identifier found");}
 					case -82:
 						break;
-					case 86:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 85:
+						{System.out.println("identifier found");}
 					case -83:
 						break;
-					case 87:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 86:
+						{System.out.println("identifier found");}
 					case -84:
 						break;
-					case 88:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 87:
+						{System.out.println("identifier found");}
 					case -85:
 						break;
-					case 89:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 88:
+						{System.out.println("identifier found");}
 					case -86:
 						break;
-					case 90:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 89:
+						{System.out.println("identifier found");}
 					case -87:
 						break;
-					case 91:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 90:
+						{System.out.println("identifier found");}
 					case -88:
 						break;
-					case 92:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
+					case 91:
+						{System.out.println("identifier found");}
 					case -89:
-						break;
-					case 93:
-						{System.out.println("identifier found");return new Yytoken(Yytoken.lexeme.IDEN,yytext());}
-					case -90:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
