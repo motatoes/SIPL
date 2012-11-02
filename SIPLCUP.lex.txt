@@ -1,0 +1,96 @@
+import java.io.FileInputStream;
+import java.cup.runime.Symbol;
+
+
+
+class SIPL {
+
+    public static void main(String argv[]) throws java.io.IOException {
+		FileInputStream in = null;
+
+	    try {
+	        in = new FileInputStream("SIPLtest.txt");
+		}
+		finally {}
+		Yylex yy = new Yylex(in);
+		Yytoken t;
+		while ((t = yy.yylex()) != null)
+		    System.out.println(t.getVal());
+    }
+
+}
+
+%%
+%cup
+%state DUMMY
+%line
+%char
+%notunix
+
+%%
+<YYINITIAL> [\ \r\n\t\b]* {System.out.println("whitespace found");}
+
+<YYINITIAL> "(" {System.out.println("right bracet found");
+		return new Symbol(sym.LPAREN);
+}
+
+<YYINITIAL> ")" {System.out.println("left bracet found");
+		return new Symbol(sym.RPAREN);
+
+}
+"-" {System.out.println("minus found")
+     return new Symbol(sym.MINUS);
+}
+"+" {System.out.println("plus found");
+     return new Symbol(sym.PLUS);
+     
+}
+"*" {
+	System.out.println("multiply found");
+	return new Symbol(sym.MULTIPLY);
+}
+"/" {
+	System.out.println("divide found");
+	return new Symbol(sym.SEMI);
+	
+}
+":=" {
+	System.out.println("equals found");
+	return new Symbol(sym.EQ);
+	
+}
+
+"<" {
+	System.out.println("less than found");
+	return new Symbol(sym.SEMI);
+}
+
+"<=" {System.out.println("less than or equals found");}
+">" {System.out.println("greater than found");}
+">=" {System.out.println("greater than or equals found");}
+"==" {System.out.println("equalequal found");}
+"!=" {System.out.println("notequals found");} 
+";" {System.out.println("semicolon found");}
+
+"true" {System.out.println("true found");}
+"false" {System.out.println("false found");}
+
+"and" {System.out.println("and found");}
+"begin" {System.out.println("begin found");}
+"do" {System.out.println("do found");}
+"else" {System.out.println("else found");}
+"end" {System.out.println("end found");}
+"if" {System.out.println("if found");}
+"input" {System.out.println("input found");}
+"not" {System.out.println("not found");}
+"or" {System.out.println("or found");}
+"output" {System.out.println("output found");}
+"then" {System.out.println("then found");}
+"var" {System.out.println("var found");}
+"while" {System.out.println("while found");}
+
+<DUMMY> . {/*next pattern matches identifiers*/}
+[_a-zA-Z][a-zA-Z0-9]* {System.out.println("identifier found");}
+<DUMMY> . {/*next pattern matches integers*/}
+[+-]?[0-9]+ {System.out.println("integer found");}
+<DUMMY> . {/*next pattern matches line comments*/}
