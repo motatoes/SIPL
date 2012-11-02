@@ -1,9 +1,14 @@
 //adapted from CUP man page http://cs.princeton.edu/~appel/manual/java/CUP/manual.htm
 import java_cup.runtime.*;
-
+/*
 init with {: scaner.init();  :};
 scan with {: return scanner.nex_token();  :};
-
+*/
+parser code {:
+    public static void main(String args[]) throws Exception {
+        new parser(new Yylex(System.in)).parse();
+    }
+:}
 terminal            MINUS, PLUS, MULTIPLY, DIVIDE, EQ, LPAREN, RPAREN;
 terminal            EQEQ, LTHAN, GTHAN, LTHANEQ, GTHANEQ, NOTEQ;
 terminal            SEMI;

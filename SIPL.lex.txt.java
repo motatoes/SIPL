@@ -34,7 +34,7 @@ class SIPL {
 }
 
 
-class Yylex {
+public class Yylex {
 	private final int YY_BUFFER_SIZE = 512;
 	private final int YY_F = -1;
 	private final int YY_NO_STATE = -1;
