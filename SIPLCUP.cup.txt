@@ -16,24 +16,42 @@ terminal            TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT;
 terminal			NOT, OR, OUTPUT, THEN, VAR, IDEN, WHILE;
 terminal    String  NUMBER;
 
-non terminal 		Program, Declarations, Block, Commands, Command, Assignment, Sequence, Conditional;
-non terminal		 Looping, Input, Output;
+non terminal 		Program, Declarations, Block, Commands, Command, Follow_Command, Assignment, Sequence, 
+					Conditional, Matched_C, Unmatched_C;
+non terminal		Looping, Loop_Body, Input, Output;
 non terminal		Int_Expression, Bool_Expression,Bool_Negate,Expr_Terminal,Factor,
 					Relop_Expression, Relop_Op, Relop_Terminal ;
 
 Program 		::= Block;
 Block 			::= BEGIN Declarations Commands END;
-Declarations	::= Declarations VAR IDEN SEMI  |
+Declarations	::= Declarations VAR IDEN SEMI ;
 Commands 		::= Commands Command SEMI | Command;
 Command 		::= Block | Assignment | Sequence | Conditional | Looping | Input | Output;
 Assignment 		::= IDEN EQ Int_Expression; 
 
+Sequence		::= Command SEMI Command;
+/*
+Follow_Command	::= Command;
 
-Int_Expression	::= Int_Expression PLUS Expr_Terminal | Int_Expression MINUS Expr_Terminal | Factor;
-Expr_Terminal 		::= Expr_Terminal MULTIPLY Factor | Expr_Terminal DIVIDE Factor 
+Conditional 	::= Matched_C | Unmatched_C;
+Unmatched_C		::= IF Bool_Expression THEN Matched_C ELSE Unmatched_C ;
+Unmatched_C 	::= Conditional;
+Matched_C		::= IF Bool_Expression THEN Matched_C ELSE Matched_C;
+Matched_C		::= Block | Assignment | Looping | Input | Output; 
+
+Looping			::= WHILE Bool_Expression DO Loop_Body;
+Loop_Body		::= Block | Input | Assignment | Looping | Output;
+
+Input 			::= INPUT VAR;
+
+Output 			::= OUTPUT Int_Expression;
+
+
+Int_Expression	::= Int_Expression PLUS Expr_Terminal | 
+					Int_Expression MINUS Expr_Terminal | Factor;
+Expr_Terminal 	::= Expr_Terminal MULTIPLY Factor | Expr_Terminal DIVIDE Factor 
 						| Factor;
 Factor			::= NUMBER | IDEN | LPAREN Int_Expression RPAREN | MINUS Int_Expression;
-
 
 Bool_Expression	::= Bool_Expression AND Bool_Negate 
 					| Bool_Expression OR Bool_Negate	
@@ -45,5 +63,6 @@ Relop_Terminal	::= NUMBER | IDEN;
 Relop_Op		::= EQEQ | LTHAN | GTHAN | LTHANEQ | GTHANEQ | NOTEQ;
 
 
+*/
 
  
