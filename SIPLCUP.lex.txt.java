@@ -1,5 +1,6 @@
 import java.io.FileInputStream;
-import java.cup.runime.Symbol;
+import java_cup.runtime.Symbol;
+/*
 class SIPL {
     public static void main(String argv[]) throws java.io.IOException {
 		FileInputStream in = null;
@@ -13,6 +14,7 @@ class SIPL {
 		    System.out.println(t.getVal());
     }
 }
+*/
 
 
 class Yylex implements java_cup.runtime.Scanner {
@@ -69,7 +71,7 @@ class Yylex implements java_cup.runtime.Scanner {
 	private final int DUMMY = 1;
 	private final int yy_state_dtrans[] = {
 		0,
-		42
+		44
 	};
 	private void yybegin (int state) {
 		yy_lexical_state = state;
@@ -222,7 +224,7 @@ class Yylex implements java_cup.runtime.Scanner {
 		return res;
 	}
 	private int yy_acpt[] = {
-		/* 0 */ YY_NO_ANCHOR,
+		/* 0 */ YY_NOT_ACCEPT,
 		/* 1 */ YY_NO_ANCHOR,
 		/* 2 */ YY_NO_ANCHOR,
 		/* 3 */ YY_NO_ANCHOR,
@@ -230,7 +232,7 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 5 */ YY_NO_ANCHOR,
 		/* 6 */ YY_NO_ANCHOR,
 		/* 7 */ YY_NO_ANCHOR,
-		/* 8 */ YY_NOT_ACCEPT,
+		/* 8 */ YY_NO_ANCHOR,
 		/* 9 */ YY_NO_ANCHOR,
 		/* 10 */ YY_NO_ANCHOR,
 		/* 11 */ YY_NO_ANCHOR,
@@ -257,16 +259,16 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 32 */ YY_NO_ANCHOR,
 		/* 33 */ YY_NO_ANCHOR,
 		/* 34 */ YY_NO_ANCHOR,
-		/* 35 */ YY_NO_ANCHOR,
-		/* 36 */ YY_NOT_ACCEPT,
+		/* 35 */ YY_NOT_ACCEPT,
+		/* 36 */ YY_NO_ANCHOR,
 		/* 37 */ YY_NO_ANCHOR,
-		/* 38 */ YY_NO_ANCHOR,
-		/* 39 */ YY_NOT_ACCEPT,
+		/* 38 */ YY_NOT_ACCEPT,
+		/* 39 */ YY_NO_ANCHOR,
 		/* 40 */ YY_NO_ANCHOR,
-		/* 41 */ YY_NO_ANCHOR,
-		/* 42 */ YY_NOT_ACCEPT,
+		/* 41 */ YY_NOT_ACCEPT,
+		/* 42 */ YY_NO_ANCHOR,
 		/* 43 */ YY_NO_ANCHOR,
-		/* 44 */ YY_NO_ANCHOR,
+		/* 44 */ YY_NOT_ACCEPT,
 		/* 45 */ YY_NO_ANCHOR,
 		/* 46 */ YY_NO_ANCHOR,
 		/* 47 */ YY_NO_ANCHOR,
@@ -321,30 +323,30 @@ class Yylex implements java_cup.runtime.Scanner {
 ",14,16,30,31,36:3,32:5,0:2")[0];
 
 	private int yy_rmap[] = unpackFromString(1,92,
-"0,1:3,2:2,1:2,3,4,5,1,6,2,1:5,7:15,1,8,9,10,3,11,12,9,13,14,11,15,6,16,17,1" +
-"8,19,20,21,22,10,23,12,24,14,25,26,27,2,28,29,30,17,7,19,31,21,32,26,33,34," +
-"35,36,37,38,39,40,41,42,43,44,45,46,47,7,31,32,33")[0];
+"0,1,2,1:2,3:2,1:2,4,5,1,6,3,1:5,7:15,1,8,9,8,10,11,10,12,13,12,14,15,6,16,1" +
+"7,18,19,20,21,22,9,23,11,24,13,25,26,27,3,28,29,30,17,7,19,31,21,32,26,33,3" +
+"4,35,36,37,38,39,40,41,42,43,44,45,46,47,7,31,32,33")[0];
 
 	private int yy_nxt[][] = unpackFromString(48,37,
-"1,35,2,3,4,5,6,7,8,36,9,10,39,11,12,88:2,66,89,68,88:2,70,37,90,88,40,43,88" +
-":2,72,91,-1,35,88,13,88,-1:72,13,-1:10,14,-1:36,16,-1:36,17,-1:41,88,74,88:" +
-"13,75,88:2,-1:3,88:2,-1:14,88:18,-1:3,88:2,-1,35,-1:31,35,-1:12,15,-1:41,88" +
-":13,19,88:4,-1:3,88:2,-1:9,18,-1:41,88:4,20,88:3,79,88:9,-1:3,88:2,1,-1,34:" +
-"2,4,5,6,7,38,41,9,10,44,11,46,67:2,48,69,50,67:2,52,54,71,67,56,58,67:2,60," +
-"73,34:2,67,62,67,-1:14,88,21,80,88:15,-1:3,88:2,-1:14,88:9,22,88:8,-1:3,88:" +
-"2,-1:14,88:9,23,88:8,-1:3,88:2,-1:14,88:6,76,88,45,88:9,-1:3,88:2,-1:14,24," +
-"88:17,-1:3,88:2,-1:14,88:8,47,88:9,-1:3,88:2,-1:14,88,25,88:16,-1:3,88:2,-1" +
-":14,88:13,49,88:4,-1:3,88:2,-1:14,88:3,26,88:14,-1:3,88:2,-1:14,88:8,27,88:" +
-"9,-1:3,88:2,-1:14,88:3,28,88:14,-1:3,88:2,-1:14,88:3,29,88:14,-1:3,88:2,-1:" +
-"14,88:5,51,88:12,-1:3,88:2,-1:14,88:8,30,88:9,-1:3,88:2,-1:14,31,88:17,-1:3" +
-",88:2,-1:14,88:3,32,88:14,-1:3,88:2,-1:14,33,88:17,-1:3,88:2,-1:14,88:5,77," +
-"88:12,-1:3,88:2,-1:14,88:3,78,88:14,-1:3,88:2,-1:14,88:15,81,88:2,-1:3,88:2" +
-",-1:14,88:2,53,88:15,-1:3,88:2,-1:14,88:3,55,88:14,-1:3,88:2,-1:14,88:7,57," +
-"88:10,-1:3,88:2,-1:14,88:6,82,88:11,-1:3,88:2,-1:14,88:11,83,88:6,-1:3,88:2" +
-",-1:14,88:14,84,88:3,-1:3,88:2,-1:14,85,88:17,-1:3,88:2,-1:14,88:12,86,88:5" +
-",-1:3,88:2,-1:14,88:7,59,88:10,-1:3,88:2,-1:14,88:12,61,88:5,-1:3,88:2,-1:1" +
-"4,88:2,63,88:15,-1:3,88:2,-1:14,88:14,87,88:3,-1:3,88:2,-1:14,88:6,64,88:11" +
-",-1:3,88:2,-1:14,88:2,65,88:15,-1:3,88:2");
+"1,2,3,4,5,6,7,8,35,38,9,10,41,11,12,88:2,66,89,68,88:2,70,36,90,88,39,42,88" +
+":2,72,91,-1,2,88,13,88,-1:38,2,-1:31,2,-1:38,13,-1:10,16,-1:36,17,-1:41,88," +
+"74,88:13,75,88:2,-1:3,88:2,-1:14,88:18,-1:3,88:2,-1:9,14,-1:41,88:13,19,88:" +
+"4,-1:3,88:2,-1:9,15,-1:41,88:4,20,88:3,79,88:9,-1:3,88:2,-1:9,18,-1:41,88,2" +
+"1,80,88:15,-1:3,88:2,1,-1,34:2,5,6,7,8,37,40,9,10,43,11,46,67:2,48,69,50,67" +
+":2,52,54,71,67,56,58,67:2,60,73,34:2,67,62,67,-1:14,88:9,22,88:8,-1:3,88:2," +
+"-1:14,88:9,23,88:8,-1:3,88:2,-1:14,88:6,76,88,45,88:9,-1:3,88:2,-1:14,24,88" +
+":17,-1:3,88:2,-1:14,88:8,47,88:9,-1:3,88:2,-1:14,88,25,88:16,-1:3,88:2,-1:1" +
+"4,88:13,49,88:4,-1:3,88:2,-1:14,88:3,26,88:14,-1:3,88:2,-1:14,88:8,27,88:9," +
+"-1:3,88:2,-1:14,88:3,28,88:14,-1:3,88:2,-1:14,88:3,29,88:14,-1:3,88:2,-1:14" +
+",88:5,51,88:12,-1:3,88:2,-1:14,88:8,30,88:9,-1:3,88:2,-1:14,31,88:17,-1:3,8" +
+"8:2,-1:14,88:3,32,88:14,-1:3,88:2,-1:14,33,88:17,-1:3,88:2,-1:14,88:5,77,88" +
+":12,-1:3,88:2,-1:14,88:3,78,88:14,-1:3,88:2,-1:14,88:15,81,88:2,-1:3,88:2,-" +
+"1:14,88:2,53,88:15,-1:3,88:2,-1:14,88:3,55,88:14,-1:3,88:2,-1:14,88:7,57,88" +
+":10,-1:3,88:2,-1:14,88:6,82,88:11,-1:3,88:2,-1:14,88:11,83,88:6,-1:3,88:2,-" +
+"1:14,88:14,84,88:3,-1:3,88:2,-1:14,85,88:17,-1:3,88:2,-1:14,88:12,86,88:5,-" +
+"1:3,88:2,-1:14,88:7,59,88:10,-1:3,88:2,-1:14,88:12,61,88:5,-1:3,88:2,-1:14," +
+"88:2,63,88:15,-1:3,88:2,-1:14,88:14,87,88:3,-1:3,88:2,-1:14,88:6,64,88:11,-" +
+"1:3,88:2,-1:14,88:2,65,88:15,-1:3,88:2");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -390,46 +392,46 @@ class Yylex implements java_cup.runtime.Scanner {
 					}
 					yy_to_mark();
 					switch (yy_last_accept_state) {
-					case 0:
-						{System.out.println("whitespace found");}
-					case -2:
-						break;
 					case 1:
 						
-					case -3:
+					case -2:
 						break;
 					case 2:
+						{System.out.println("whitespace found");}
+					case -3:
+						break;
+					case 3:
 						{System.out.println("right bracet found");
 		return new Symbol(sym.LPAREN);
 }
 					case -4:
 						break;
-					case 3:
+					case 4:
 						{System.out.println("left bracet found");
 		return new Symbol(sym.RPAREN);
 }
 					case -5:
 						break;
-					case 4:
+					case 5:
 						{System.out.println("minus found");
      return new Symbol(sym.MINUS);
 }
 					case -6:
 						break;
-					case 5:
+					case 6:
 						{System.out.println("plus found");
      return new Symbol(sym.PLUS);
 }
 					case -7:
 						break;
-					case 6:
+					case 7:
 						{
 	System.out.println("multiply found");
 	return new Symbol(sym.MULTIPLY);
 }
 					case -8:
 						break;
-					case 7:
+					case 8:
 						{
 	System.out.println("divide found");
 	return new Symbol(sym.SEMI);
@@ -546,221 +548,217 @@ class Yylex implements java_cup.runtime.Scanner {
 						{/*next pattern matches identifiers*/}
 					case -35:
 						break;
-					case 35:
-						{System.out.println("whitespace found");}
+					case 36:
+						{System.out.println("identifier found");}
 					case -36:
 						break;
 					case 37:
-						{System.out.println("identifier found");}
+						{/*next pattern matches identifiers*/}
 					case -37:
 						break;
-					case 38:
-						{/*next pattern matches identifiers*/}
+					case 39:
+						{System.out.println("identifier found");}
 					case -38:
 						break;
 					case 40:
-						{System.out.println("identifier found");}
+						{/*next pattern matches identifiers*/}
 					case -39:
 						break;
-					case 41:
-						{/*next pattern matches identifiers*/}
+					case 42:
+						{System.out.println("identifier found");}
 					case -40:
 						break;
 					case 43:
-						{System.out.println("identifier found");}
-					case -41:
-						break;
-					case 44:
 						{/*next pattern matches identifiers*/}
-					case -42:
+					case -41:
 						break;
 					case 45:
 						{System.out.println("identifier found");}
-					case -43:
+					case -42:
 						break;
 					case 46:
 						{/*next pattern matches identifiers*/}
-					case -44:
+					case -43:
 						break;
 					case 47:
 						{System.out.println("identifier found");}
-					case -45:
+					case -44:
 						break;
 					case 48:
 						{/*next pattern matches identifiers*/}
-					case -46:
+					case -45:
 						break;
 					case 49:
 						{System.out.println("identifier found");}
-					case -47:
+					case -46:
 						break;
 					case 50:
 						{/*next pattern matches identifiers*/}
-					case -48:
+					case -47:
 						break;
 					case 51:
 						{System.out.println("identifier found");}
-					case -49:
+					case -48:
 						break;
 					case 52:
 						{/*next pattern matches identifiers*/}
-					case -50:
+					case -49:
 						break;
 					case 53:
 						{System.out.println("identifier found");}
-					case -51:
+					case -50:
 						break;
 					case 54:
 						{/*next pattern matches identifiers*/}
-					case -52:
+					case -51:
 						break;
 					case 55:
 						{System.out.println("identifier found");}
-					case -53:
+					case -52:
 						break;
 					case 56:
 						{/*next pattern matches identifiers*/}
-					case -54:
+					case -53:
 						break;
 					case 57:
 						{System.out.println("identifier found");}
-					case -55:
+					case -54:
 						break;
 					case 58:
 						{/*next pattern matches identifiers*/}
-					case -56:
+					case -55:
 						break;
 					case 59:
 						{System.out.println("identifier found");}
-					case -57:
+					case -56:
 						break;
 					case 60:
 						{/*next pattern matches identifiers*/}
-					case -58:
+					case -57:
 						break;
 					case 61:
 						{System.out.println("identifier found");}
-					case -59:
+					case -58:
 						break;
 					case 62:
 						{/*next pattern matches identifiers*/}
-					case -60:
+					case -59:
 						break;
 					case 63:
 						{System.out.println("identifier found");}
-					case -61:
+					case -60:
 						break;
 					case 64:
 						{System.out.println("identifier found");}
-					case -62:
+					case -61:
 						break;
 					case 65:
 						{System.out.println("identifier found");}
-					case -63:
+					case -62:
 						break;
 					case 66:
 						{System.out.println("identifier found");}
-					case -64:
+					case -63:
 						break;
 					case 67:
 						{/*next pattern matches identifiers*/}
-					case -65:
+					case -64:
 						break;
 					case 68:
 						{System.out.println("identifier found");}
-					case -66:
+					case -65:
 						break;
 					case 69:
 						{/*next pattern matches identifiers*/}
-					case -67:
+					case -66:
 						break;
 					case 70:
 						{System.out.println("identifier found");}
-					case -68:
+					case -67:
 						break;
 					case 71:
 						{/*next pattern matches identifiers*/}
-					case -69:
+					case -68:
 						break;
 					case 72:
 						{System.out.println("identifier found");}
-					case -70:
+					case -69:
 						break;
 					case 73:
 						{/*next pattern matches identifiers*/}
-					case -71:
+					case -70:
 						break;
 					case 74:
 						{System.out.println("identifier found");}
-					case -72:
+					case -71:
 						break;
 					case 75:
 						{System.out.println("identifier found");}
-					case -73:
+					case -72:
 						break;
 					case 76:
 						{System.out.println("identifier found");}
-					case -74:
+					case -73:
 						break;
 					case 77:
 						{System.out.println("identifier found");}
-					case -75:
+					case -74:
 						break;
 					case 78:
 						{System.out.println("identifier found");}
-					case -76:
+					case -75:
 						break;
 					case 79:
 						{System.out.println("identifier found");}
-					case -77:
+					case -76:
 						break;
 					case 80:
 						{System.out.println("identifier found");}
-					case -78:
+					case -77:
 						break;
 					case 81:
 						{System.out.println("identifier found");}
-					case -79:
+					case -78:
 						break;
 					case 82:
 						{System.out.println("identifier found");}
-					case -80:
+					case -79:
 						break;
 					case 83:
 						{System.out.println("identifier found");}
-					case -81:
+					case -80:
 						break;
 					case 84:
 						{System.out.println("identifier found");}
-					case -82:
+					case -81:
 						break;
 					case 85:
 						{System.out.println("identifier found");}
-					case -83:
+					case -82:
 						break;
 					case 86:
 						{System.out.println("identifier found");}
-					case -84:
+					case -83:
 						break;
 					case 87:
 						{System.out.println("identifier found");}
-					case -85:
+					case -84:
 						break;
 					case 88:
 						{System.out.println("identifier found");}
-					case -86:
+					case -85:
 						break;
 					case 89:
 						{System.out.println("identifier found");}
-					case -87:
+					case -86:
 						break;
 					case 90:
 						{System.out.println("identifier found");}
-					case -88:
+					case -87:
 						break;
 					case 91:
 						{System.out.println("identifier found");}
-					case -89:
+					case -88:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

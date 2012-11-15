@@ -30,7 +30,9 @@ class SIPL {
 %notunix
 
 %%
-<YYINITIAL> [\ \r\n\t\b]+ {System.out.println("whitespace found");}
+<YYINITIAL> [\ \r\n\t\b] {System.out.println("whitespace found");
+//whitespace is ignored
+}
 
 <YYINITIAL> "(" {System.out.println("right bracet found");
 		return new Symbol(sym.LPAREN);

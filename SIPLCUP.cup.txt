@@ -12,9 +12,29 @@ parser code {:
 terminal            MINUS, PLUS, MULTIPLY, DIVIDE, EQ, LPAREN, RPAREN;
 terminal            EQEQ, LTHAN, GTHAN, LTHANEQ, GTHANEQ, NOTEQ;
 terminal            SEMI;
-terminal            TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT, NOT, OR, OUTPUT, THEN, VAR, WHILE;
+terminal            TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT;
+terminal			NOT, OR, OUTPUT, THEN, VAR, WHILE;
 terminal    String  NUMBER;
 
-non terminal expr;
+non terminal 		Program, Block, Commands, Command, Assignment, Sequence, Conditional;
+non terminal		Sequence, Looping, Input, Output;
+non terminal		Int_Expression, Bool_Expression;
 
-expr ::= NUMBER | NUMBER expr;
+Program 		::= Block;
+Block 			::= Begin Commands End;
+Commands 		::= Commands Command; | Command;
+Command 		::= Block | Assignment | Sequence | Conditional | Looping | Input | Output;
+Assignment 		::= Variable EQ Int_Expression; 
+
+Int_Expression	::= Int_Expression + Terminal | Int_Expression - Terminal | F;
+Terminal 		::= Terminal * Factor | Terminal / Factor | Factor;
+Factor			::= NUMBER | VAR | ( Int_Expression ) | MINUS Int_Expression;
+
+Bool_Expression	::= Relop_Bool | Immediate_Bool;
+Relop_Bool		::= Int_Expression Comparison Bool_RHS;
+Comparison		::= EQEQ | LTHAN | GTHAN | LTHANEQ | GTHANEQ | NOTEQ;
+Immediate_Bool	::= TRUE | FALSE;
+Bool_RHS		::= AND 
+
+
+ 
