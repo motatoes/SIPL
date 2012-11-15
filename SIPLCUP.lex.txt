@@ -66,35 +66,35 @@ class SIPL {
 
 "<" {
 	System.out.println("less than found");
-	return new Symbol(sym.SEMI);
+	return new Symbol(sym.LTHAN);
 }
 
-"<=" {System.out.println("less than or equals found");}
-">" {System.out.println("greater than found");}
-">=" {System.out.println("greater than or equals found");}
-"==" {System.out.println("equalequal found");}
-"!=" {System.out.println("notequals found");} 
-";" {System.out.println("semicolon found");}
+"<=" {System.out.println("less than or equals found");return new Symbol(sym.LTHANEQ);}
+">" {System.out.println("greater than found");return new Symbol(sym.LTHAN);}
+">=" {System.out.println("greater than or equals found");return new Symbol(sym.GTHANEQ);}
+"==" {System.out.println("equalequal found");return new Symbol(sym.EQEQ);}
+"!=" {System.out.println("notequals found");return new Symbol(sym.NOTEQ);} 
+";" {System.out.println("semicolon found");return new Symbol(sym.SEMI);}
 
-"true" {System.out.println("true found");}
-"false" {System.out.println("false found");}
+"true" {System.out.println("true found");return new Symbol(sym.TRUE);}
+"false" {System.out.println("false found");return new Symbol(sym.FALSE);}
 
-"and" {System.out.println("and found");}
-"begin" {System.out.println("begin found");}
-"do" {System.out.println("do found");}
-"else" {System.out.println("else found");}
-"end" {System.out.println("end found");}
-"if" {System.out.println("if found");}
-"input" {System.out.println("input found");}
-"not" {System.out.println("not found");}
-"or" {System.out.println("or found");}
-"output" {System.out.println("output found");}
-"then" {System.out.println("then found");}
-"var" {System.out.println("var found");}
-"while" {System.out.println("while found");}
+"and" {System.out.println("and found");return new Symbol(sym.AND);}
+"begin" {System.out.println("begin found");return new Symbol(sym.BEGIN);}
+"do" {System.out.println("do found");return new Symbol(sym.DO);}
+"else" {System.out.println("else found");return new Symbol(sym.ELSE);}
+"end" {System.out.println("end found");return new Symbol(sym.END);}
+"if" {System.out.println("if found");return new Symbol(sym.IF);}
+"input" {System.out.println("input found");return new Symbol(sym.INPUT);}
+"not" {System.out.println("not found");return new Symbol(sym.NOT);}
+"or" {System.out.println("or found");return new Symbol(sym.OR);}
+"output" {System.out.println("output found");return new Symbol(sym.OUTPUT);}
+"then" {System.out.println("then found");return new Symbol(sym.THEN);}
+"var" {System.out.println("var found");return new Symbol(sym.VAR);}
+"while" {System.out.println("while found");return new Symbol(sym.WHILE);}
 
 <DUMMY> . {/*next pattern matches identifiers*/}
-[_a-zA-Z][a-zA-Z0-9]* {System.out.println("identifier found");}
+[_a-zA-Z][a-zA-Z0-9]* {System.out.println("identifier found");return new Symbol(sym.IDEN);}
 <DUMMY> . {/*next pattern matches integers*/}
-[+-]?[0-9]+ {System.out.println("integer found");}
+[+-]?[0-9]+ {System.out.println("integer found");return new Symbol(sym.NUMBER);}
 <DUMMY> . {/*next pattern matches line comments*/}

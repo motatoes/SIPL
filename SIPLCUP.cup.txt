@@ -13,28 +13,37 @@ terminal            MINUS, PLUS, MULTIPLY, DIVIDE, EQ, LPAREN, RPAREN;
 terminal            EQEQ, LTHAN, GTHAN, LTHANEQ, GTHANEQ, NOTEQ;
 terminal            SEMI;
 terminal            TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT;
-terminal			NOT, OR, OUTPUT, THEN, VAR, WHILE;
+terminal			NOT, OR, OUTPUT, THEN, VAR, IDEN, WHILE;
 terminal    String  NUMBER;
 
-non terminal 		Program, Block, Commands, Command, Assignment, Sequence, Conditional;
-non terminal		Sequence, Looping, Input, Output;
-non terminal		Int_Expression, Bool_Expression;
+non terminal 		Program, Declarations, Block, Commands, Command, Assignment, Sequence, Conditional;
+non terminal		 Looping, Input, Output;
+non terminal		Int_Expression, Bool_Expression,Bool_Negate,Expr_Terminal,Factor,
+					Relop_Expression, Relop_Op, Relop_Terminal ;
 
 Program 		::= Block;
-Block 			::= Begin Commands End;
-Commands 		::= Commands Command; | Command;
+Block 			::= BEGIN Declarations Commands END;
+Declarations	::= Declarations VAR IDEN SEMI  |
+Commands 		::= Commands Command SEMI | Command;
 Command 		::= Block | Assignment | Sequence | Conditional | Looping | Input | Output;
-Assignment 		::= Variable EQ Int_Expression; 
+Assignment 		::= IDEN EQ Int_Expression; 
 
-Int_Expression	::= Int_Expression + Terminal | Int_Expression - Terminal | F;
-Terminal 		::= Terminal * Factor | Terminal / Factor | Factor;
-Factor			::= NUMBER | VAR | ( Int_Expression ) | MINUS Int_Expression;
 
-Bool_Expression	::= Relop_Bool | Immediate_Bool;
-Relop_Bool		::= Int_Expression Comparison Bool_RHS;
-Comparison		::= EQEQ | LTHAN | GTHAN | LTHANEQ | GTHANEQ | NOTEQ;
-Immediate_Bool	::= TRUE | FALSE;
-Bool_RHS		::= AND 
+Int_Expression	::= Int_Expression PLUS Expr_Terminal | Int_Expression MINUS Expr_Terminal | Factor;
+Expr_Terminal 		::= Expr_Terminal MULTIPLY Factor | Expr_Terminal DIVIDE Factor 
+						| Factor;
+Factor			::= NUMBER | IDEN | LPAREN Int_Expression RPAREN | MINUS Int_Expression;
+
+
+Bool_Expression	::= Bool_Expression AND Bool_Negate 
+					| Bool_Expression OR Bool_Negate	
+					| Bool_Negate;
+Bool_Negate		::= TRUE | FALSE | NOT Bool_Negate | Relop_Expression;
+Relop_Expression::= Relop_Expression Relop_Op Relop_Terminal 
+					| Relop_Terminal;
+Relop_Terminal	::= NUMBER | IDEN;
+Relop_Op		::= EQEQ | LTHAN | GTHAN | LTHANEQ | GTHANEQ | NOTEQ;
+
 
 
  
