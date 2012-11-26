@@ -71,7 +71,7 @@ class Yylex implements java_cup.runtime.Scanner {
 	private final int DUMMY = 1;
 	private final int yy_state_dtrans[] = {
 		0,
-		44
+		41
 	};
 	private void yybegin (int state) {
 		yy_lexical_state = state;
@@ -259,16 +259,16 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 32 */ YY_NO_ANCHOR,
 		/* 33 */ YY_NO_ANCHOR,
 		/* 34 */ YY_NO_ANCHOR,
-		/* 35 */ YY_NOT_ACCEPT,
+		/* 35 */ YY_NO_ANCHOR,
 		/* 36 */ YY_NO_ANCHOR,
-		/* 37 */ YY_NO_ANCHOR,
-		/* 38 */ YY_NOT_ACCEPT,
+		/* 37 */ YY_NOT_ACCEPT,
+		/* 38 */ YY_NO_ANCHOR,
 		/* 39 */ YY_NO_ANCHOR,
 		/* 40 */ YY_NO_ANCHOR,
 		/* 41 */ YY_NOT_ACCEPT,
 		/* 42 */ YY_NO_ANCHOR,
 		/* 43 */ YY_NO_ANCHOR,
-		/* 44 */ YY_NOT_ACCEPT,
+		/* 44 */ YY_NO_ANCHOR,
 		/* 45 */ YY_NO_ANCHOR,
 		/* 46 */ YY_NO_ANCHOR,
 		/* 47 */ YY_NO_ANCHOR,
@@ -315,38 +315,41 @@ class Yylex implements java_cup.runtime.Scanner {
 		/* 88 */ YY_NO_ANCHOR,
 		/* 89 */ YY_NO_ANCHOR,
 		/* 90 */ YY_NO_ANCHOR,
-		/* 91 */ YY_NO_ANCHOR
+		/* 91 */ YY_NO_ANCHOR,
+		/* 92 */ YY_NO_ANCHOR,
+		/* 93 */ YY_NO_ANCHOR,
+		/* 94 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
-"32:8,33:2,1,32:2,1,32:18,33,12,32:6,2,3,6,5,32,4,32,7,35:10,8,13,10,9,11,32" +
-":2,36:26,32:4,34,32,19,24,36,23,17,18,25,29,26,36:2,20,36,22,27,28,36,15,21" +
-",14,16,30,31,36:3,32:5,0:2")[0];
+"32:8,33:2,1,32:2,37,32:18,33,12,32:6,2,3,6,5,32,4,32,7,35:10,8,13,10,9,11,3" +
+"2:2,36:26,32:4,34,32,19,24,36,23,17,18,25,29,26,36:2,20,36,22,27,28,36,15,2" +
+"1,14,16,30,31,36:3,32:5,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,92,
-"0,1:4,2:2,1:2,3,4,1,5,2,1:5,6:15,1,7,8,7,9,10,9,11,12,11,13,14,5,15,16,17,1" +
-"8,19,20,21,8,22,10,23,12,24,25,26,2,27,28,29,16,6,18,30,20,31,25,32,33,34,3" +
-"5,36,37,38,39,40,41,42,43,44,45,46,6,30,31,32")[0];
+	private int yy_rmap[] = unpackFromString(1,95,
+"0,1:7,2,3,4,5,1,6,7,1:5,8:3,1,8:12,1,9,10,11,3,12,13,14,10,1,15,13,16,6,17," +
+"18,19,20,21,22,23,11,24,14,25,15,26,27,28,7,29,30,31,18,8,20,32,22,33,27,34" +
+",35,36,37,38,39,40,41,42,43,44,45,46,47,48,8,32,33,34")[0];
 
-	private int yy_nxt[][] = unpackFromString(47,37,
-"1,2,3,4,5,6,7,8,35,38,9,10,41,11,12,88:2,66,89,68,88:2,70,36,90,88,39,42,88" +
-":2,72,91,-1,2,88,13,88,-1:72,13,-1:10,16,-1:36,17,-1:41,88,74,88:13,75,88:2" +
-",-1:3,88:2,-1:14,88:18,-1:3,88:2,-1:9,14,-1:41,88:13,19,88:4,-1:3,88:2,-1:9" +
-",15,-1:41,88:4,20,88:3,79,88:9,-1:3,88:2,-1:9,18,-1:41,88,21,80,88:15,-1:3," +
-"88:2,1,-1,34:2,5,6,7,8,37,40,9,10,43,11,46,67:2,48,69,50,67:2,52,54,71,67,5" +
-"6,58,67:2,60,73,34:2,67,62,67,-1:14,88:9,22,88:8,-1:3,88:2,-1:14,88:9,23,88" +
-":8,-1:3,88:2,-1:14,88:6,76,88,45,88:9,-1:3,88:2,-1:14,24,88:17,-1:3,88:2,-1" +
-":14,88:8,47,88:9,-1:3,88:2,-1:14,88,25,88:16,-1:3,88:2,-1:14,88:13,49,88:4," +
-"-1:3,88:2,-1:14,88:3,26,88:14,-1:3,88:2,-1:14,88:8,27,88:9,-1:3,88:2,-1:14," +
-"88:3,28,88:14,-1:3,88:2,-1:14,88:3,29,88:14,-1:3,88:2,-1:14,88:5,51,88:12,-" +
-"1:3,88:2,-1:14,88:8,30,88:9,-1:3,88:2,-1:14,31,88:17,-1:3,88:2,-1:14,88:3,3" +
-"2,88:14,-1:3,88:2,-1:14,33,88:17,-1:3,88:2,-1:14,88:5,77,88:12,-1:3,88:2,-1" +
-":14,88:3,78,88:14,-1:3,88:2,-1:14,88:15,81,88:2,-1:3,88:2,-1:14,88:2,53,88:" +
-"15,-1:3,88:2,-1:14,88:3,55,88:14,-1:3,88:2,-1:14,88:7,57,88:10,-1:3,88:2,-1" +
-":14,88:6,82,88:11,-1:3,88:2,-1:14,88:11,83,88:6,-1:3,88:2,-1:14,88:14,84,88" +
-":3,-1:3,88:2,-1:14,85,88:17,-1:3,88:2,-1:14,88:12,86,88:5,-1:3,88:2,-1:14,8" +
-"8:7,59,88:10,-1:3,88:2,-1:14,88:12,61,88:5,-1:3,88:2,-1:14,88:2,63,88:15,-1" +
-":3,88:2,-1:14,88:14,87,88:3,-1:3,88:2,-1:14,88:6,64,88:11,-1:3,88:2,-1:14,8" +
-"8:2,65,88:15,-1:3,88:2");
+	private int yy_nxt[][] = unpackFromString(49,38,
+"1,2,3,4,5,6,7,8,9,38,10,11,42,12,13,91:2,69,92,71,91:2,73,39,93,91,43,46,91" +
+":2,75,94,45,2,91,14,91,2,-1:45,37,-1:39,15,-1:37,17,-1:37,18,-1:42,91,77,91" +
+":13,78,91:2,-1:3,91:2,-1:36,14,-1:16,91:18,-1:3,91:2,-1:2,23,37:36,-1:9,16," +
+"-1:42,91:13,20,91:4,-1:3,91:2,-1,1,-1,36:2,5,6,7,8,40,44,10,11,47,12,49,70:" +
+"2,51,72,53,70:2,55,57,74,70,59,61,70:2,63,76,36:2,70,65,70,-1:10,19,-1:42,9" +
+"1:4,21,91:3,82,91:9,-1:3,91:2,-1:15,91,22,83,91:15,-1:3,91:2,-1:15,91:9,24," +
+"91:8,-1:3,91:2,-1:15,91:9,25,91:8,-1:3,91:2,-1:15,91:6,79,91,48,91:9,-1:3,9" +
+"1:2,-1:15,26,91:17,-1:3,91:2,-1:15,91:8,50,91:9,-1:3,91:2,-1:15,91,27,91:16" +
+",-1:3,91:2,-1:15,91:13,52,91:4,-1:3,91:2,-1:15,91:3,28,91:14,-1:3,91:2,-1:1" +
+"5,91:8,29,91:9,-1:3,91:2,-1:15,91:3,30,91:14,-1:3,91:2,-1:15,91:3,31,91:14," +
+"-1:3,91:2,-1:15,91:5,54,91:12,-1:3,91:2,-1:15,91:8,32,91:9,-1:3,91:2,-1:15," +
+"33,91:17,-1:3,91:2,-1:15,91:3,34,91:14,-1:3,91:2,-1:15,35,91:17,-1:3,91:2,-" +
+"1:15,91:5,80,91:12,-1:3,91:2,-1:15,91:3,81,91:14,-1:3,91:2,-1:15,91:15,84,9" +
+"1:2,-1:3,91:2,-1:15,91:2,56,91:15,-1:3,91:2,-1:15,91:3,58,91:14,-1:3,91:2,-" +
+"1:15,91:7,60,91:10,-1:3,91:2,-1:15,91:6,85,91:11,-1:3,91:2,-1:15,91:11,86,9" +
+"1:6,-1:3,91:2,-1:15,91:14,87,91:3,-1:3,91:2,-1:15,88,91:17,-1:3,91:2,-1:15," +
+"91:12,89,91:5,-1:3,91:2,-1:15,91:7,62,91:10,-1:3,91:2,-1:15,91:12,64,91:5,-" +
+"1:3,91:2,-1:15,91:2,66,91:15,-1:3,91:2,-1:15,91:14,90,91:3,-1:3,91:2,-1:15," +
+"91:6,67,91:11,-1:3,91:2,-1:15,91:2,68,91:15,-1:3,91:2,-1");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -397,19 +400,19 @@ class Yylex implements java_cup.runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{System.out.println("whitespace found");
+						{//System.out.println("whitespace found");
 //whitespace is ignored
 }
 					case -3:
 						break;
 					case 3:
-						{System.out.println("right bracet found");
+						{System.out.println("left bracet found");
 		return new Symbol(sym.LPAREN);
 }
 					case -4:
 						break;
 					case 4:
-						{System.out.println("left bracet found");
+						{System.out.println("right bracet found");
 		return new Symbol(sym.RPAREN);
 }
 					case -5:
@@ -441,326 +444,346 @@ class Yylex implements java_cup.runtime.Scanner {
 					case -9:
 						break;
 					case 9:
-						{
-	System.out.println("less than found");
-	return new Symbol(sym.SEMI);
-}
+						{ return new Symbol( sym.error ); }
 					case -10:
 						break;
 					case 10:
-						{System.out.println("greater than found");}
+						{
+	System.out.println("less than found");
+	return new Symbol(sym.LTHAN);
+}
 					case -11:
 						break;
 					case 11:
-						{System.out.println("semicolon found");}
+						{System.out.println("greater than found");return new Symbol(sym.LTHAN);}
 					case -12:
 						break;
 					case 12:
-						{System.out.println("identifier found");}
+						{System.out.println("semicolon found");return new Symbol(sym.SEMI);}
 					case -13:
 						break;
 					case 13:
-						{System.out.println("integer found");}
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -14:
 						break;
 					case 14:
+						{System.out.println("integer found");return new Symbol(sym.NUMBER,yytext());}
+					case -15:
+						break;
+					case 15:
 						{
 	System.out.println("equals found");
 	return new Symbol(sym.EQ);
 }
-					case -15:
-						break;
-					case 15:
-						{System.out.println("equalequal found");}
 					case -16:
 						break;
 					case 16:
-						{System.out.println("less than or equals found");}
+						{System.out.println("equalequal found");return new Symbol(sym.EQEQ);}
 					case -17:
 						break;
 					case 17:
-						{System.out.println("greater than or equals found");}
+						{System.out.println("less than or equals found");return new Symbol(sym.LTHANEQ);}
 					case -18:
 						break;
 					case 18:
-						{System.out.println("notequals found");}
+						{System.out.println("greater than or equals found");return new Symbol(sym.GTHANEQ);}
 					case -19:
 						break;
 					case 19:
-						{System.out.println("do found");}
+						{System.out.println("notequals found");return new Symbol(sym.NOTEQ);}
 					case -20:
 						break;
 					case 20:
-						{System.out.println("if found");}
+						{System.out.println("do found");return new Symbol(sym.DO);}
 					case -21:
 						break;
 					case 21:
-						{System.out.println("or found");}
+						{System.out.println("if found");return new Symbol(sym.IF);}
 					case -22:
 						break;
 					case 22:
-						{System.out.println("end found");}
+						{System.out.println("or found");return new Symbol(sym.OR);}
 					case -23:
 						break;
 					case 23:
-						{System.out.println("and found");}
+						{/*comments are ignored*/}
 					case -24:
 						break;
 					case 24:
-						{System.out.println("not found");}
+						{System.out.println("end found");return new Symbol(sym.END);}
 					case -25:
 						break;
 					case 25:
-						{System.out.println("var found");}
+						{System.out.println("and found");return new Symbol(sym.AND);}
 					case -26:
 						break;
 					case 26:
-						{System.out.println("true found");}
+						{System.out.println("not found");return new Symbol(sym.NOT);}
 					case -27:
 						break;
 					case 27:
-						{System.out.println("then found");}
+						{System.out.println("var found");return new Symbol(sym.VAR);}
 					case -28:
 						break;
 					case 28:
-						{System.out.println("else found");}
+						{System.out.println("true found");return new Symbol(sym.TRUE);}
 					case -29:
 						break;
 					case 29:
-						{System.out.println("false found");}
+						{System.out.println("then found");return new Symbol(sym.THEN);}
 					case -30:
 						break;
 					case 30:
-						{System.out.println("begin found");}
+						{System.out.println("else found");return new Symbol(sym.ELSE);}
 					case -31:
 						break;
 					case 31:
-						{System.out.println("input found");}
+						{System.out.println("false found");return new Symbol(sym.FALSE);}
 					case -32:
 						break;
 					case 32:
-						{System.out.println("while found");}
+						{System.out.println("begin found");return new Symbol(sym.BEGIN);}
 					case -33:
 						break;
 					case 33:
-						{System.out.println("output found");}
+						{System.out.println("input found");return new Symbol(sym.INPUT);}
 					case -34:
 						break;
 					case 34:
-						{/*next pattern matches identifiers*/}
+						{System.out.println("while found");return new Symbol(sym.WHILE);}
 					case -35:
 						break;
-					case 36:
-						{System.out.println("identifier found");}
+					case 35:
+						{System.out.println("output found");return new Symbol(sym.OUTPUT);}
 					case -36:
 						break;
-					case 37:
+					case 36:
 						{/*next pattern matches identifiers*/}
 					case -37:
 						break;
-					case 39:
-						{System.out.println("identifier found");}
+					case 38:
+						{ return new Symbol( sym.error ); }
 					case -38:
+						break;
+					case 39:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
+					case -39:
 						break;
 					case 40:
 						{/*next pattern matches identifiers*/}
-					case -39:
-						break;
-					case 42:
-						{System.out.println("identifier found");}
 					case -40:
 						break;
-					case 43:
-						{/*next pattern matches identifiers*/}
+					case 42:
+						{ return new Symbol( sym.error ); }
 					case -41:
 						break;
-					case 45:
-						{System.out.println("identifier found");}
+					case 43:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -42:
 						break;
-					case 46:
+					case 44:
 						{/*next pattern matches identifiers*/}
 					case -43:
 						break;
-					case 47:
-						{System.out.println("identifier found");}
+					case 45:
+						{ return new Symbol( sym.error ); }
 					case -44:
 						break;
-					case 48:
-						{/*next pattern matches identifiers*/}
+					case 46:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -45:
 						break;
-					case 49:
-						{System.out.println("identifier found");}
+					case 47:
+						{/*next pattern matches identifiers*/}
 					case -46:
 						break;
-					case 50:
-						{/*next pattern matches identifiers*/}
+					case 48:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -47:
 						break;
-					case 51:
-						{System.out.println("identifier found");}
+					case 49:
+						{/*next pattern matches identifiers*/}
 					case -48:
 						break;
-					case 52:
-						{/*next pattern matches identifiers*/}
+					case 50:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -49:
 						break;
-					case 53:
-						{System.out.println("identifier found");}
+					case 51:
+						{/*next pattern matches identifiers*/}
 					case -50:
 						break;
-					case 54:
-						{/*next pattern matches identifiers*/}
+					case 52:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -51:
 						break;
-					case 55:
-						{System.out.println("identifier found");}
+					case 53:
+						{/*next pattern matches identifiers*/}
 					case -52:
 						break;
-					case 56:
-						{/*next pattern matches identifiers*/}
+					case 54:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -53:
 						break;
-					case 57:
-						{System.out.println("identifier found");}
+					case 55:
+						{/*next pattern matches identifiers*/}
 					case -54:
 						break;
-					case 58:
-						{/*next pattern matches identifiers*/}
+					case 56:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -55:
 						break;
-					case 59:
-						{System.out.println("identifier found");}
+					case 57:
+						{/*next pattern matches identifiers*/}
 					case -56:
 						break;
-					case 60:
-						{/*next pattern matches identifiers*/}
+					case 58:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -57:
 						break;
-					case 61:
-						{System.out.println("identifier found");}
+					case 59:
+						{/*next pattern matches identifiers*/}
 					case -58:
 						break;
-					case 62:
-						{/*next pattern matches identifiers*/}
+					case 60:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -59:
 						break;
-					case 63:
-						{System.out.println("identifier found");}
+					case 61:
+						{/*next pattern matches identifiers*/}
 					case -60:
 						break;
-					case 64:
-						{System.out.println("identifier found");}
+					case 62:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -61:
 						break;
-					case 65:
-						{System.out.println("identifier found");}
+					case 63:
+						{/*next pattern matches identifiers*/}
 					case -62:
 						break;
-					case 66:
-						{System.out.println("identifier found");}
+					case 64:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -63:
 						break;
-					case 67:
+					case 65:
 						{/*next pattern matches identifiers*/}
 					case -64:
 						break;
-					case 68:
-						{System.out.println("identifier found");}
+					case 66:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -65:
 						break;
-					case 69:
-						{/*next pattern matches identifiers*/}
+					case 67:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -66:
 						break;
-					case 70:
-						{System.out.println("identifier found");}
+					case 68:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -67:
 						break;
-					case 71:
-						{/*next pattern matches identifiers*/}
+					case 69:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -68:
 						break;
-					case 72:
-						{System.out.println("identifier found");}
+					case 70:
+						{/*next pattern matches identifiers*/}
 					case -69:
 						break;
-					case 73:
-						{/*next pattern matches identifiers*/}
+					case 71:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -70:
 						break;
-					case 74:
-						{System.out.println("identifier found");}
+					case 72:
+						{/*next pattern matches identifiers*/}
 					case -71:
 						break;
-					case 75:
-						{System.out.println("identifier found");}
+					case 73:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -72:
 						break;
-					case 76:
-						{System.out.println("identifier found");}
+					case 74:
+						{/*next pattern matches identifiers*/}
 					case -73:
 						break;
-					case 77:
-						{System.out.println("identifier found");}
+					case 75:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -74:
 						break;
-					case 78:
-						{System.out.println("identifier found");}
+					case 76:
+						{/*next pattern matches identifiers*/}
 					case -75:
 						break;
-					case 79:
-						{System.out.println("identifier found");}
+					case 77:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -76:
 						break;
-					case 80:
-						{System.out.println("identifier found");}
+					case 78:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -77:
 						break;
-					case 81:
-						{System.out.println("identifier found");}
+					case 79:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -78:
 						break;
-					case 82:
-						{System.out.println("identifier found");}
+					case 80:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -79:
 						break;
-					case 83:
-						{System.out.println("identifier found");}
+					case 81:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -80:
 						break;
-					case 84:
-						{System.out.println("identifier found");}
+					case 82:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -81:
 						break;
-					case 85:
-						{System.out.println("identifier found");}
+					case 83:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -82:
 						break;
-					case 86:
-						{System.out.println("identifier found");}
+					case 84:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -83:
 						break;
-					case 87:
-						{System.out.println("identifier found");}
+					case 85:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -84:
 						break;
-					case 88:
-						{System.out.println("identifier found");}
+					case 86:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -85:
 						break;
-					case 89:
-						{System.out.println("identifier found");}
+					case 87:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -86:
 						break;
-					case 90:
-						{System.out.println("identifier found");}
+					case 88:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -87:
 						break;
-					case 91:
-						{System.out.println("identifier found");}
+					case 89:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 					case -88:
+						break;
+					case 90:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
+					case -89:
+						break;
+					case 91:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
+					case -90:
+						break;
+					case 92:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
+					case -91:
+						break;
+					case 93:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
+					case -92:
+						break;
+					case 94:
+						{System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
+					case -93:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

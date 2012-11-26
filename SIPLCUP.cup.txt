@@ -1,67 +1,198 @@
-//adapted from CUP man page http://cs.princeton.edu/~appel/manual/java/CUP/manual.htm
+
 import java_cup.runtime.*;
+import java.io.FileInputStream;
 /*
 init with {: scaner.init();  :};
 scan with {: return scanner.nex_token();  :};
 */
 parser code {:
-    public static void main(String args[]) throws Exception {
-        new parser(new Yylex(System.in)).parse();
-    }
+		public Node root = null;
+
+		//for storing recursive production rules
+		public Node Temp = null;
+
+		public Node getTree() throws Exception {
+			if (root == null) {
+				this.parse();
+			}
+			return root;
+		}
+
+		public Node createNode(Object o) {
+			return new Node( ((Node)o).GetValue(),"",false) ;
+		}
 :}
+
+/** ============== TERMINAL ==================== **/
+
 terminal            MINUS, PLUS, MULTIPLY, DIVIDE, EQ, LPAREN, RPAREN;
 terminal            EQEQ, LTHAN, GTHAN, LTHANEQ, GTHANEQ, NOTEQ;
 terminal            SEMI;
-terminal            TRUE, FALSE, AND, BEGIN, DO , ELSE, END, IF, INPUT;
-terminal			NOT, OR, OUTPUT, THEN, VAR, IDEN, WHILE;
-terminal    String  NUMBER;
+terminal    String	TRUE, FALSE;
+terminal			 AND, BEGIN, DO , ELSE, END, IF, INPUT,NOT, OR, OUTPUT, THEN, VAR, WHILE;
+terminal 	String	IDEN;
+terminal    String NUMBER;
 
-non terminal 		Program, Declarations, Block, Commands, Command, Follow_Command, Assignment, Sequence, 
-					Conditional, Matched_C, Unmatched_C;
-non terminal		Looping, Loop_Body, Input, Output;
-non terminal		Int_Expression, Bool_Expression,Bool_Negate,Expr_Terminal,Factor,
-					Relop_Expression, Relop_Op, Relop_Terminal ;
 
-Program 		::= Block;
-Block 			::= BEGIN Declarations Commands END;
-Declarations	::= Declarations VAR IDEN SEMI ;
-Commands 		::= Commands Command SEMI | Command;
-Command 		::= Block | Assignment | Sequence | Conditional | Looping | Input | Output;
-Assignment 		::= IDEN EQ Int_Expression; 
+/** ============== NON TERMINAL ===================== **/
 
-Sequence		::= Command SEMI Command;
-/*
-Follow_Command	::= Command;
+non terminal 	Node		Program, Declarations, Block,  Command,Other_Commands, Assignment, 								Sequence, Conditional;
 
-Conditional 	::= Matched_C | Unmatched_C;
-Unmatched_C		::= IF Bool_Expression THEN Matched_C ELSE Unmatched_C ;
-Unmatched_C 	::= Conditional;
-Matched_C		::= IF Bool_Expression THEN Matched_C ELSE Matched_C;
-Matched_C		::= Block | Assignment | Looping | Input | Output; 
+non terminal	Node		Looping, Loop_Body, Input, Output;
+non terminal	Node		Int_Expression;
+non terminal 	Node		Bool_Expression;
+non terminal 	Node	 	Bool_Negate;
 
-Looping			::= WHILE Bool_Expression DO Loop_Body;
+non terminal 	Node		Expr_Terminal;
+non terminal 	Node 		Factor;
+non terminal 	Node		Relop_Expression;
+
+non terminal 	String	    Relop_Op;
+non terminal 	String 		Relop_Terminal;
+
+
+/** ============= PRECEDENCES ============= **/
+precedence left 	PLUS, MULTIPLY, DIVIDE, MINUS,ELSE,SEMI;
+ 			
+/*===================== GRAMMAR RULES ============== **/
+
+Program 		::= Block:b
+					{:
+						
+						RESULT = new Node("program", "", false,b);
+						 parser.root = (Node)RESULT;
+					:};
+Block 			::= BEGIN Declarations:dec  Command:com END {: 
+						
+						RESULT =  new Node("block","",false, dec,com );
+															  
+					:};
+
+Declarations	::=  VAR IDEN:iden {:
+					 System.out.println(RESULT);
+					 parser.Temp = new Node("declaration","",false,
+					 				new Node("iden", iden, false), parser.Temp );
+					 RESULT = parser.Temp;
+																	:}	 
+					
+					
+
+					 SEMI Declarations:dec  {: RESULT = dec; :}
+					
+					| {: RESULT = new Node("declaration","", false); :} ;
+
+
+
+/** SHOULDCOMMAND BE EMPTY OR NO?!!!!! **/
+Command 		::= Other_Commands:oc {: RESULT = oc; :} | Sequence:seq {: RESULT = seq; :} 
+					| {::} ;
+
+
+Other_Commands	::= Block:block {: RESULT=block; :} 
+					| Assignment:ass {: RESULT= ass; :} 
+					| Input:in {:RESULT=in; :} 
+					| Output:out {:RESULT = out; :} 
+					| Conditional:con {: RESULT=con; :} 
+					| Looping:loop {: RESULT=loop; :} ;
+
+Assignment 		::= IDEN:iden EQ Int_Expression:ie {: RESULT = new Node("eq","",false,
+																	new Node("iden",iden,false),
+																	parser.createNode(ie) ); :} ; 
+
+
+
+Sequence		::= Command:com1 SEMI Command:com2 {: System.out.println("!!!!!!!!!!!!!");RESULT = new Node("semi", "", false,
+														 com1 ,
+														 com2 ) ; :};
+
+
+
+
+Conditional 	::= 	IF Bool_Expression:be THEN Other_Commands:oc1 ELSE Other_Commands:oc2
+						{: RESULT = new Node("if","",false,
+											be,
+											new Node("ifelsebody", "", false,
+												new Node("ifbody", "",false, 
+														oc1),
+												new Node("elsebody","", false,
+														oc2 ) ) ); :}; 
+
+Conditional		::=		IF Bool_Expression:be THEN Other_Commands:oc 
+						{: RESULT = new Node("if","",false,
+												be,
+												oc ); :} ;
+
+Looping			::= WHILE Bool_Expression:be DO Loop_Body:lb 
+						{: RESULT = new Node("while", "", false, 
+											be,	
+											lb ); :} ;
 Loop_Body		::= Block | Input | Assignment | Looping | Output;
 
-Input 			::= INPUT VAR;
+Input 			::= INPUT IDEN:iden {: RESULT= new Node("input","", false,
+													new Node("iden", iden, false) ); :};
 
-Output 			::= OUTPUT Int_Expression;
+Output 			::= OUTPUT Int_Expression:ie {:RESULT = new Node("output", "" , false,
+															ie ); :} ;
+
+Int_Expression	::= Int_Expression:ie PLUS Expr_Terminal:et 
+						{: RESULT = new Node("plus","", false,
+										 ie,
+										 et ); :} | 
+					Int_Expression MINUS Expr_Terminal | Expr_Terminal;
 
 
-Int_Expression	::= Int_Expression PLUS Expr_Terminal | 
-					Int_Expression MINUS Expr_Terminal | Factor;
-Expr_Terminal 	::= Expr_Terminal MULTIPLY Factor | Expr_Terminal DIVIDE Factor 
-						| Factor;
-Factor			::= NUMBER | IDEN | LPAREN Int_Expression RPAREN | MINUS Int_Expression;
+Expr_Terminal 	::= Expr_Terminal:et MULTIPLY Factor:fac 
+					{: RESULT = new Node("multiply","",false,
+									 	et,
+									 	(Node)fac); :}
 
-Bool_Expression	::= Bool_Expression AND Bool_Negate 
-					| Bool_Expression OR Bool_Negate	
+						| Expr_Terminal DIVIDE Factor:fac {: RESULT = new Node("divide","",false, 
+																			fac ); :} 
+						| Factor:fac {: RESULT = (Node)fac; :};
+
+Factor			::= NUMBER:num {: RESULT = new Node("num",num,false); :}
+					| IDEN:iden {: RESULT = new Node("iden",iden, false); :}
+					| LPAREN Int_Expression:ie RPAREN {: RESULT = ie; :} 
+					| MINUS Int_Expression:ie {: RESULT = new Node("minus","",false, 
+																ie ); :} ;
+
+
+
+Bool_Expression	::= Bool_Expression:be AND:and Bool_Negate:bn 
+					{: RESULT = new Node("AND", "", false, 
+										be,
+										bn ); :}
+					
+					| Bool_Expression OR Bool_Negate 
+
 					| Bool_Negate;
-Bool_Negate		::= TRUE | FALSE | NOT Bool_Negate | Relop_Expression;
-Relop_Expression::= Relop_Expression Relop_Op Relop_Terminal 
-					| Relop_Terminal;
-Relop_Terminal	::= NUMBER | IDEN;
-Relop_Op		::= EQEQ | LTHAN | GTHAN | LTHANEQ | GTHANEQ | NOTEQ;
 
+Bool_Negate		::= TRUE {: RESULT = new Node("true","",false); :} 
+
+					| FALSE {:RESULT = new Node("false","" , false); :} 
+					| NOT Bool_Negate:bn {: RESULT = new Node("not", "" , false, 
+													 		bn ); :} 
+					| Relop_Expression;
+
+Relop_Expression::= Relop_Terminal:re Relop_Op:ro Relop_Terminal:rt 
+					{:RESULT = new Node(ro,"" , false,
+								 	new Node(re,"",false),
+								 	new Node(rt, "" , false) ); :}
+
+					| Relop_Terminal:rt {: RESULT = new Node("relopterminal",rt, false); :};
+
+Relop_Terminal	::= NUMBER:num {: RESULT =  num; :} 
+					| IDEN:iden {: RESULT =  iden; :};
+
+Relop_Op		::= EQEQ {: RESULT = "eqeq"; :} 
+					| LTHAN {: RESULT = "lthan"; :} 
+					| GTHAN {: RESULT = "gthan"; :}
+					| LTHANEQ {: RESULT = "lthaneq"; :}
+					| GTHANEQ {: RESULT = "gthaneq"; :}
+					| NOTEQ  {: RESULT = "noteq"; :};
+
+
+/*****
 
 */
 

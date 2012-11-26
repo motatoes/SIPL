@@ -22,6 +22,7 @@ class SIPL {
 
 }
 */
+
 %%
 %cup
 %state DUMMY
@@ -30,15 +31,15 @@ class SIPL {
 %notunix
 
 %%
-<YYINITIAL> [\ \r\n\t\b] {System.out.println("whitespace found");
+<YYINITIAL> [\ \r\n\t\b] {//System.out.println("whitespace found");
 //whitespace is ignored
 }
 
-<YYINITIAL> "(" {System.out.println("right bracet found");
+<YYINITIAL> "(" {System.out.println("left bracet found");
 		return new Symbol(sym.LPAREN);
 }
 
-<YYINITIAL> ")" {System.out.println("left bracet found");
+<YYINITIAL> ")" {System.out.println("right bracet found");
 		return new Symbol(sym.RPAREN);
 
 }
@@ -94,7 +95,10 @@ class SIPL {
 "while" {System.out.println("while found");return new Symbol(sym.WHILE);}
 
 <DUMMY> . {/*next pattern matches identifiers*/}
-[_a-zA-Z][a-zA-Z0-9]* {System.out.println("identifier found");return new Symbol(sym.IDEN);}
+[_a-zA-Z][a-zA-Z0-9]* {System.out.println("identifier found");return new Symbol(sym.IDEN,yytext());}
 <DUMMY> . {/*next pattern matches integers*/}
-[+-]?[0-9]+ {System.out.println("integer found");return new Symbol(sym.NUMBER);}
+[0-9]+ {System.out.println("integer found");return new Symbol(sym.NUMBER,yytext());}
 <DUMMY> . {/*next pattern matches line comments*/}
+(//[^\n]*\n) {/*comments are ignored*/}
+. { return new Symbol( sym.error ); }
+
