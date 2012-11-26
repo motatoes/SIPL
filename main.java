@@ -28,6 +28,8 @@ public class main {
 	        Node x = p.getTree();//.GetLeftChild();
     		//x = x.GetLeftChild();
     		System.out.println(x.EvaluateToString());
+    		System.out.println("****PROGRAMD DUUMP****");
+    		System.out.println(x.dump_program());
     	//}
     	//catch (Exception e) {
     		//not a valid language :-(

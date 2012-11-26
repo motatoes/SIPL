@@ -439,7 +439,7 @@ class Yylex implements java_cup.runtime.Scanner {
 					case 8:
 						{
 	System.out.println("divide found");
-	return new Symbol(sym.SEMI);
+	return new Symbol(sym.DIVIDE);
 }
 					case -9:
 						break;

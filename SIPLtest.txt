@@ -3,9 +3,19 @@ begin
 var alphaiden;
 var b;//even inline comments are ignored
 input aalphaiden;
-//input b ;
-//if alphaiden == 0 then output b else
-//begin while b <=0 do begin if a>b
-//then a:=a-b else b:=b-a end; output a ;
-//end
+
+
+a := a + b  - c * d / e ;
+
+//output b;
+if  (a+1) <= b * 2 + 3 or true  then 
+a := b 
+else
+
+b := c;
+c := d;
+
+begin while b <=0 do begin if a>b
+then a:=a-b else b:=b-a end; output a ;
+end
  end

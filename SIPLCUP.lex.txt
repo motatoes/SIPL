@@ -56,7 +56,7 @@ class SIPL {
 }
 "/" {
 	System.out.println("divide found");
-	return new Symbol(sym.SEMI);
+	return new Symbol(sym.DIVIDE);
 	
 }
 ":=" {

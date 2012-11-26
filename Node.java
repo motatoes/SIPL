@@ -59,12 +59,370 @@ public class Node {
 
     public String EvaluateToString(){
         String temp="";
+        temp+=value + ":" + type + "- ";
         if(leftChild!=null)
             temp+= "\nLL  " + leftChild.EvaluateToString();
-        temp+=value + ":" + type + "- ";
         if(rightChild!=null)
             temp+="\nRR  " + rightChild.EvaluateToString();
         return temp;
+    }
+    public String dump_program() {
+    	return dump_program_dummy(0);
+    }
+    private String dump_program_dummy(int indent) {
+	        String temp="";
+	        
+
+	        switch (value) {
+
+	        	case "block":
+	        		temp += getIndent(indent) + "begin\n" ;
+		        	indent++;
+	        	
+			        if(leftChild!=null) {
+			            	temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}
+	        		indent--;
+	        		temp += getIndent(indent) + "end\n";
+	        		break;
+
+	        	case "declaration":
+	        		temp += getIndent(indent) + "var ";
+
+			        if(leftChild!=null) {
+			            	temp += leftChild.dump_program_dummy(indent); 
+			        }
+		        	temp += " ;\n";
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}
+	        		break;
+	        	case "iden":
+					temp += type;
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}
+		        	break;
+	        	case "num":
+					temp += type;
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}
+		        	break;
+		        case "seq":
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+
+		        	}		        	
+		        	break;
+ 
+ 		        case "input":
+	 		        temp += getIndent(indent) + "input ";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " ; \n";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            
+		        	}		        	
+		        	break;
+ 
+ 		        case "output":
+	 		        temp += getIndent(indent) + "output ";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " ; \n";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            
+		        	}		        	
+		        	break;
+ 		        
+ 		        case "assignment":
+	 		        temp += getIndent(indent);
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " := ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            temp += " ; \n";
+		        	}		        	
+		        	break;
+ 		        
+ 		        case "EPLUS":
+	 		        temp += "";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " + ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            temp += "";
+		        	}		        	
+		        	break;
+ 		        
+ 		        case "EMINUS":
+	 		        temp += "";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " - ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            temp += "";
+		        	}		        	
+		        	break;
+ 		        
+ 		        case "ETIMES":
+	 		        temp += "(";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " * ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}		  
+		            temp += ")";
+					break;
+ 		        case "EDIVIDE":
+	 		        temp += "(";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " / ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}		  
+		            temp += ")";
+					break;
+
+ 		        case "if":
+	 		        temp += getIndent(indent) + "if ";
+			        if(leftChild!=null) {
+			        	temp += "( ";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " ) then\n";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += "";
+		        	}	
+		        	break;	
+
+ 		        case "ifbody":
+	 		        temp += getIndent(indent) + "begin\n ";
+	 		        indent ++;
+			        if(leftChild!=null) {
+			        	
+			            temp += leftChild.dump_program_dummy(indent); 
+			           
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}	
+		        	indent--;
+		            temp += getIndent(indent) + "end\n";
+		        	break;	
+
+ 		        case "elsebody":
+	 		        temp += getIndent(indent) + "else\n";
+	 		        temp +=  getIndent(indent) + "begin\n ";
+	 		        indent ++ ;
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}	
+		        	indent --;
+		            temp += getIndent(indent) + "end\n";
+		        	break;	
+
+		        case "true":
+	 		        temp += " TRUE ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += "";
+		        	}	
+		        	break;	
+
+		        case "false":
+	 		        temp += " FALSE ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += "";
+		        	}	
+		        	break;	
+
+		        case "eqeq":
+	 		        temp += "( ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " == ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += " )";
+		        	}	
+		        	break;	
+
+
+		        case "lthan":
+	 		        temp += "( ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " < ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += " )";
+		        	}	
+		        	break;	
+
+
+		        case "lthaneq":
+	 		        temp += "( ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " <= ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += " )";
+		        	}	
+		        	break;	
+
+
+		        case "gthan":
+	 		        temp += "( ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " > ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += " )";
+		        	}	
+		        	break;	
+
+
+		        case "gthaneq":
+	 		        temp += "( ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " >= ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += " )";
+		        	}	
+		        	break;	
+
+
+		        case "AND":
+	 		        temp += " ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " AND ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += "";
+		        	}	
+		        	break;	
+
+		        case "OR":
+	 		        temp += " ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " OR ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		            temp += "";
+		        	}	
+		        	break;	
+
+
+
+
+
+
+
+
+ 		        case "while":
+	 		        temp += getIndent(indent) + "while ";
+			        if(leftChild!=null) {
+			        	temp += "( ";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " ) do\n";
+						temp += getIndent(indent) + "begin\n";
+						indent ++ ;
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            indent --;
+		            	temp += getIndent(indent) + "end\n";
+		        	}	
+		        	break;	
+
+	
+
+
+	       		default:
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}
+	        		break;
+
+	        }
+
+        return temp;   	
+    }
+
+    public String getIndent (int iden) {
+    	String t="";
+
+    	for (int i=0;i<iden;i++) {
+    		t += "    ";
+    	}
+
+    	return t;
     }
 
 }
