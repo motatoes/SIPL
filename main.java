@@ -1,7 +1,7 @@
 import java_cup.runtime.*;
 import java.io.FileInputStream;
 
-public class main {
+public class Main {
 
     public static void main(String args[]) throws Exception {
 
