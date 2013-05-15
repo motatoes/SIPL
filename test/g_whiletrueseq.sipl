@@ -1,0 +1,1 @@
+begin while true do a:=1 ; outsideLoop :=2 end
