@@ -164,7 +164,17 @@ public class Node {
 			            temp += " ; \n";
 		        	}		        	
 		        	break;
- 		        
+ 		        case "BRACETS":
+			        if(leftChild!=null) {
+			        	temp += "( ";
+			            temp += leftChild.dump_program_dummy(indent); 
+			        	temp += " )";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            temp += " ; \n";
+		        	}		        	
+		        	break;		        	
  		        case "EPLUS":
 	 		        temp += "";
 			        if(leftChild!=null) {

@@ -14,15 +14,15 @@ parser code {:
 		public Node Tempbe = null;
 
 		public Node getTree() throws Exception {
-			if (root == null) {
-				this.parse();
-			}
+			//if (root == null) {
+			//	this.parse();
+			//}
 			return root;
 		}
 
-		public Node createNode(Object o) {
-			return new Node( ((Node)o).GetValue(),"",false) ;
-		}
+		//public Node createNode(Object o) {
+		//	return new Node( ((Node)o).GetValue(),"",false) ;
+		//}
 :}
 
 /** ============== TERMINAL ==================== **/
@@ -58,40 +58,42 @@ precedence left 	PLUS, MULTIPLY, DIVIDE, MINUS,ELSE,SEMI,OR,AND;
  			
 /*===================== GRAMMAR RULES ============== **/
 
-Program 		::= Block:b
-					{:
-						
-						RESULT = new Node("program", "", false,b);
-						 parser.root = (Node)RESULT;
-					:};
-Block 			::= BEGIN Declarations:dec {: parser.Temp= null;parser.Temp= null; :}
-						  Command:com END {: 
-						
-						RESULT =  new Node("block","",false, dec,com );
-															  
-					:};
-
-Declarations	::=  VAR IDEN:iden {:
+/* Program production */
+Program ::= Block:b
+		{:						
+		RESULT = new Node("program", "", false, b);
+		parser.root = (Node)RESULT;
+		:};
 
 
-					 parser.Temp = new Node("declaration","",false,
-					 				new Node("iden", iden, false), parser.Temp );
-					 RESULT = parser.Temp;
-					:}	 
-					
-					
+/* Block production */
+Block	::= BEGIN Declarations:dec 
+		{: parser.Temp= null;parser.Temp= null; :}
+		   Command:com END 
+		{: RESULT =  new Node("block","",false, dec,com ); :};
 
-					 SEMI Declarations:dec  {: RESULT = parser.Temp;  :}
-					
-					| {: RESULT = parser.Temp ; :};
 
+/* Declarations production */
+Declarations	::=  VAR IDEN:iden 
+				{:
+				parser.Temp = new Node("declaration","",false,
+					 		  new Node("iden", iden, false), parser.Temp );
+				RESULT = parser.Temp;
+				:}	 
+				SEMI Declarations:dec
+				{: RESULT = parser.Temp;  :}
+				| {: RESULT = parser.Temp ; :};
 
 
 /** SHOULDCOMMAND BE EMPTY OR NO?!!!!! **/
-Command 		::= Other_Commands:oc {: RESULT = oc; :} | Sequence:seq {: RESULT = seq; :} 
-					| {::} ;
+/* Command production */
+Command ::= Other_Commands:oc 
+			{: RESULT = oc; :} 
+			| Sequence:seq {: RESULT = seq; :} 
+			| {::} ;
 
 
+/* Other_Commands production */
 Other_Commands	::= Block:block {: RESULT=block; :} 
 					| Assignment:ass {: RESULT= ass; :} 
 					| Input:in {:RESULT=in; :} 
@@ -99,138 +101,160 @@ Other_Commands	::= Block:block {: RESULT=block; :}
 					| Conditional:con {: RESULT=con; :} 
 					| Looping:loop {: RESULT=loop; :} ;
 
-Assignment 		::= IDEN:iden EQ Int_Expression:ie {: RESULT = new Node("assignment","",false,
-																	new Node("iden",iden,false),
-																	ie ); :} ; 
+
+/* Assignment production */
+Assignment 	::= IDEN:iden EQ Int_Expression:ie 
+			{: 
+			RESULT = new Node("assignment","",false,
+					 new Node("iden",iden,false), ie ); 
+			:}; 
 
 
-
-Sequence		::= Command:com1 SEMI Command:com2 {: RESULT = new Node("seq", "", false,
-														 com1 ,
-														 com2 ) ; :};
-
-
-
-
-Conditional 	::= 	IF Bool_Expression:be THEN Other_Commands:oc1 ELSE Other_Commands:oc2
-						{: RESULT = new Node("if","",false,
-											new Node( "ifcond", "" , false, be ) ,
-											new Node("ifelsebody", "", false,
-												new Node("ifbody", "",false, 
-														oc1),
-												new Node("elsebody","", false,
-														oc2 ) ) );
-							parser.Tempbe = null;
-						:}; 
-
-Conditional		::=		IF Bool_Expression:be  THEN Other_Commands:oc 
-						{: RESULT = new Node("if","",false,
-												new Node( "ifcond", "" , false, be ),
-												oc );
-							parser.Tempbe = null;
-
-						:} ;
-
-Looping			::= WHILE Bool_Expression:be {: parser.Tempbe = null; :} DO Loop_Body:lb 
-						{: RESULT = new Node("while", "", false, 
-											new Node("loopcondition","",false,be),	
-											new Node("loopbody","",false,lb) ); :} ;
+/* Sequence production */
+Sequence	::= Command:com1 SEMI Command:com2 
+			{:
+			RESULT = new Node("seq", "", false, com1, com2 ); 
+			:};
 
 
-Loop_Body		::= Block:b {: RESULT = b; :} 
-					| Input:in {: RESULT = in; :} 
-					| Assignment:ass {: RESULT = ass;:} 
-					| Looping:loop {: RESULT = loop;:}
-					| Output:out {: RESULT = out; :} ;
+/* Conditional production */
+Conditional	::=	IF Bool_Expression:be THEN Other_Commands:oc1 	
+				ELSE Other_Commands:oc2
+			{: 
+			RESULT = new Node("if","",false,
+					 new Node( "ifcond", "" , false, be ),
+					 new Node("ifelsebody", "", false,
+					 new Node("ifbody", "",false, oc1),
+					 new Node("elsebody","", false, oc2 ) ) );
+					 parser.Tempbe = null;
+			:};
 
-Input 			::= INPUT IDEN:iden {: RESULT= new Node("input","", false,
-													new Node("iden", iden, false) ); :};
 
-Output 			::= OUTPUT Int_Expression:ie {:RESULT = new Node("output", "" , false,
-															ie ); :} ;
+/* Conditional production */
+Conditional	::=	IF Bool_Expression:be THEN Other_Commands:oc 
+			{: 
+			RESULT = new Node("if","",false,
+					 new Node("ifcond", "", false, be ), oc );
+					 parser.Tempbe = null;
+			:} ;
+
+
+/* Looping production */
+Looping	::= WHILE Bool_Expression:be 
+		{: parser.Tempbe = null; :} 
+		DO Loop_Body:lb 
+		{: 
+		RESULT = new Node("while", "", false, 
+				 new Node("loopcondition","",false,be),	
+				 new Node("loopbody","",false,lb) ); 
+		:};
+
+
+Loop_Body ::= Block:b {: RESULT = b; :} 
+			  | Input:in {: RESULT = in; :} 
+			  | Assignment:ass {: RESULT = ass;:} 
+			  | Looping:loop {: RESULT = loop;:}
+			  | Output:out {: RESULT = out; :} ;
+
+Input  ::= INPUT IDEN:iden 
+	   {: RESULT= new Node("input","", false,
+				  new Node("iden", iden, false) ); 
+	   :};
+
+
+/* Output production */
+Output  ::= OUTPUT Int_Expression:ie 
+		{:RESULT = new Node("output", "" , false, ie ); 
+		:};
+
 
 /* =============== int expression ============= */
-Int_Expression	::= 
-					Int_Expression:ie1 PLUS  Int_Expression:ie2  {: 
-									parser.Tempie = new Node("ETerm", "", false, 
-										new Node("EPLUS","",false,
-										ie1,
-										ie2 ) );
-										RESULT = parser.Tempie; :} 
-
-					|  Int_Expression:ie1  MINUS Int_Expression:ie2  
-									{: parser.Tempie =  new Node("ETerm", "", false, 
-										new Node("EMINUS","",false,
-										ie1,
-										ie2 )  );
-										RESULT = parser.Tempie; :}
-
-
-					| Expr_Terminal:et {: RESULT = et; :} ;
+Int_Expression ::= Int_Expression:ie1 PLUS  Int_Expression:ie2  			    {:  parser.Tempie = 
+				    new Node("ETerm", "", false, 
+					new Node("EPLUS","",false, ie1, ie2 ) );
+					RESULT = parser.Tempie; 
+			    :} 
+				|  Int_Expression:ie1  MINUS Int_Expression:ie2  
+			    {:
+			    	parser.Tempie = 
+			    	new Node("ETerm", "", false, 
+					new Node("EMINUS","",false, ie1, ie2 )  );
+					RESULT = parser.Tempie; 
+			    :}
+				| Expr_Terminal:et {: RESULT = et; :} ;
 
 
+/* Expr_Terminal production */
 Expr_Terminal 	::= Expr_Terminal:et1 MULTIPLY Expr_Terminal:et2 
-					{:  parser.Tempie =  new Node("EFac", "", false, 
-										new Node("ETIMES","",false,
-										et1,
-										et2 )  );
-										RESULT = parser.Tempie; :}
+					{:  
+						parser.Tempie = 
+						new Node("EFac", "", false, 
+						new Node("ETIMES","",false, et1, et2 ));
+						RESULT = parser.Tempie; 
+					:}
+					| Expr_Terminal:et1 DIVIDE Expr_Terminal:et2 
+					{:  
+						parser.Tempie =  
+						new Node("EFac", "", false, 
+						new Node("EDIVIDE","",false, et1, et2));
+						RESULT = parser.Tempie; 
+					:}
+					| Factor:fac {: RESULT = fac; :};
 
-						| Expr_Terminal:et1 DIVIDE Expr_Terminal:et2 
-						{:  parser.Tempie =  new Node("EFac", "", false, 
-										new Node("EDIVIDE","",false,
-										et1,
-										et2 )  );
-										RESULT = parser.Tempie; :}
 
-						| Factor:fac {: RESULT = fac; :};
-
-Factor			::= NUMBER:num {: RESULT = new Node("num",num,false); :}
-					| IDEN:iden {: RESULT = new Node("iden",iden, false); :}
-					| LPAREN Int_Expression:ie RPAREN {: RESULT = ie; :} 
-					| MINUS Int_Expression:ie {: RESULT = new Node("minus","",false, 
-																ie ); :} ;
+/* Factor production */
+Factor 	::= NUMBER:num 
+		{: RESULT = new Node("num",num,false); :}
+		| IDEN:iden {: RESULT = new Node("iden",iden, false); :}
+		| LPAREN Int_Expression:ie RPAREN 
+		{: 
+			RESULT = new Node ("BRACETS",  "", false, ie); 
+		:} 
+		| MINUS Int_Expression:ie 
+		{: RESULT = new Node ("minus","",false, ie ); :} ;
 
 
 /* ============== boolean expression ============ */
 
-Bool_Expression	::=    Bool_Expression:be1 AND:and Bool_Expression:be2 {: 
-									parser.Tempbe =  new Node("EBexp", "", false, 
-										new Node("AND","",false,
-										be1,
-										be2 )  );
-										RESULT = parser.Tempbe; :}
-					
-					
-					| Bool_Expression:be1 OR Bool_Expression:be2  {: 
-									parser.Tempbe =  new Node("EBexp", "", false, 
-										new Node("OR","",false,
-										be1,
-										be2 )  );
-										RESULT = parser.Tempbe; :}
-		
-						
+Bool_Expression	::= 
+				Bool_Expression:be1 AND:and Bool_Expression:be2 
+				{: 
+					parser.Tempbe =  
+					new Node("EBexp", "", false, 
+					new Node("AND","",false,be1, be2 )  );
+					RESULT = parser.Tempbe; 
+				:}
+				| Bool_Expression:be1 OR Bool_Expression:be2 
+				{: 
+				  parser.Tempbe =  
+				  new Node("EBexp", "", false, 
+				  new Node("OR","",false, be1, be2 ));
+				  RESULT = parser.Tempbe; 
+				:}
+				| Bool_Negate:ne {:	RESULT = ne; :};
 
-					| Bool_Negate:ne {: 									
-									RESULT = ne;
-									 :};
 
-Bool_Negate		::= TRUE {: RESULT = new Node("true","",false); :} 
+/* Bool_Negate production */
+Bool_Negate	::= TRUE {: RESULT = new Node("true","",false); :} 
+				| FALSE 
+				{:RESULT = new Node("false","" , false); :} 
+				| NOT Bool_Negate:bn 
+				{: RESULT = new Node("not", "" , false,	bn ); :} 
+				| Relop_Expression:re {: RESULT = re; :} ;
 
-					| FALSE {:RESULT = new Node("false","" , false); :} 
-					| NOT Bool_Negate:bn {: RESULT = new Node("not", "" , false, 
-													 		bn ); :} 
-					| Relop_Expression:re {: RESULT = re; :} ;
 
-Relop_Expression::= Relop_Terminal:re Relop_Op:ro Relop_Terminal:rt 
-					{:RESULT = new Node(ro,"" , false,
-								 	re,
-								 	rt ); :}
+/* Relop_Epression production */
+Relop_Expression::= 
+				Relop_Terminal:re Relop_Op:ro Relop_Terminal:rt 
+				{:RESULT = new Node(ro,"" , false, re, rt ); :}
+				| Relop_Terminal:rt {: RESULT = rt; :};
 
-					| Relop_Terminal:rt {: RESULT = rt; :};
 
+/* Relop_Terminal */
 Relop_Terminal	::= Int_Expression:ie {: RESULT = ie; :};
 
+
+/* Relop_Op */
 Relop_Op		::= EQEQ {: RESULT = "eqeq"; :} 
 					| LTHAN {: RESULT = "lthan"; :} 
 					| GTHAN {: RESULT = "gthan"; :}
@@ -239,8 +263,4 @@ Relop_Op		::= EQEQ {: RESULT = "eqeq"; :}
 					| NOTEQ  {: RESULT = "noteq"; :};
 
 
-/*****
 
-*/
-
- 
