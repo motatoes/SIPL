@@ -199,6 +199,17 @@ public class Node {
 		        	}		        	
 		        	break;
  		        
+ 		        case "UNARYMINUS":
+	 		        temp += "";
+			        if(leftChild!=null) {	
+			        	temp += " ( ";
+			        	temp += " - ";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " ) ";
+			            temp += "";
+		        	}		        	
+		        	break;
+ 		        
  		        case "ETIMES":
 	 		        temp += "(";
 			        if(leftChild!=null) {
@@ -231,12 +242,11 @@ public class Node {
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
-		            temp += "";
 		        	}	
 		        	break;	
 
  		        case "ifbody":
-	 		        temp += getIndent(indent) + "begin\n ";
+	 		        temp += getIndent(indent) + "begin\n";
 	 		        indent ++;
 			        if(leftChild!=null) {
 			        	

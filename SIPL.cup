@@ -44,6 +44,7 @@ non terminal	Node		Looping, Loop_Body, Input, Output;
 non terminal	Node		Int_Expression;
 non terminal 	Node		Bool_Expression;
 non terminal 	Node	 	Bool_Negate;
+non terminal 	Node	 	Else_Stmt;
 
 non terminal 	Node		Expr_Terminal;
 non terminal 	Node 		Factor;
@@ -118,26 +119,35 @@ Sequence	::= Command:com1 SEMI Command:com2
 
 
 /* Conditional production */
-Conditional	::=	IF Bool_Expression:be THEN Other_Commands:oc1 	
+/*Conditional	::=	IF Bool_Expression:be THEN Other_Commands:oc1 	
 				ELSE Other_Commands:oc2
 			{: 
 			RESULT = new Node("if","",false,
 					 new Node( "ifcond", "" , false, be ),
 					 new Node("ifelsebody", "", false,
-					 new Node("ifbody", "",false, oc1),
-					 new Node("elsebody","", false, oc2 ) ) );
+					 new Node("ifbody", "", false, oc1),
+					 new Node("elsebody", "", false, oc2 ) ) );
 					 parser.Tempbe = null;
 			:};
-
+*/
 
 /* Conditional production */
-Conditional	::=	IF Bool_Expression:be THEN Other_Commands:oc 
+Conditional	::=	IF Bool_Expression:be THEN Other_Commands:oc Else_Stmt:eb 
 			{: 
 			RESULT = new Node("if","",false,
-					 new Node("ifcond", "", false, be ), oc );
+					 new Node("ifcond", "", false, be ),
+					 new Node("ifelsebody", "", false,
+					 new Node("ifbody", "", false, oc),
+					 eb) );
 					 parser.Tempbe = null;
 			:} ;
 
+
+Else_Stmt ::= ELSE Other_Commands:eb
+			   {:
+			   	RESULT = new Node("elsebody", "", false, eb);
+			   :}
+			  | ;
 
 /* Looping production */
 Looping	::= WHILE Bool_Expression:be 
@@ -211,7 +221,7 @@ Factor 	::= NUMBER:num
 			RESULT = new Node ("BRACETS",  "", false, ie); 
 		:} 
 		| MINUS Int_Expression:ie 
-		{: RESULT = new Node ("minus","",false, ie ); :} ;
+		{: RESULT = new Node ("UNARYMINUS","",false, ie ); :} ;
 
 
 /* ============== boolean expression ============ */
@@ -238,7 +248,7 @@ Bool_Expression	::=
 Bool_Negate	::= TRUE {: RESULT = new Node("true","",false); :} 
 				| FALSE 
 				{:RESULT = new Node("false","" , false); :} 
-				| NOT Bool_Negate:bn 
+				| NOT Bool_Expression:bn 
 				{: RESULT = new Node("not", "" , false,	bn ); :} 
 				| Relop_Expression:re {: RESULT = re; :} ;
 
@@ -246,8 +256,8 @@ Bool_Negate	::= TRUE {: RESULT = new Node("true","",false); :}
 /* Relop_Epression production */
 Relop_Expression::= 
 				Relop_Terminal:re Relop_Op:ro Relop_Terminal:rt 
-				{:RESULT = new Node(ro,"" , false, re, rt ); :}
-				| Relop_Terminal:rt {: RESULT = rt; :};
+				{:RESULT = new Node(ro,"" , false, re, rt ); :} ;
+
 
 
 /* Relop_Terminal */

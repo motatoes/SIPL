@@ -1,0 +1,7 @@
+begin
+    if (  TRUE  ) then
+    begin
+        a := 1 ; 
+    end
+end
+

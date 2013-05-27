@@ -1,0 +1,14 @@
+begin
+    if (  TRUE  ) then
+    begin
+        if (  FALSE  ) then
+        begin
+            a := 1 ; 
+        end
+        else
+        begin
+             matchesFirstIf := 2 ; 
+        end
+    end
+end
+

@@ -1,0 +1,14 @@
+begin
+    if ( ( 1 < 2 ) ) then
+    begin
+        if ( ( 2 < 1 ) ) then
+        begin
+            a := 1 ; 
+        end
+        else
+        begin
+             marchesFirstIf := 2 ; 
+        end
+    end
+end
+

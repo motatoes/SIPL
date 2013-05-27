@@ -1,0 +1,8 @@
+begin
+    if (  TRUE  ) then
+    begin
+        a := 1 ; 
+    end
+    outsideIf := 2 ; 
+end
+
