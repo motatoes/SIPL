@@ -1,0 +1,2 @@
+begin if a < b or b < a and c == d and not (a<b or c != d)
+then a := 1 end

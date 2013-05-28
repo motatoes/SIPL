@@ -1,8 +1,0 @@
-begin
-    while (  TRUE  ) do
-    begin
-        a := 1 ; 
-    end
-    outsideLoop := 2 ; 
-end
-

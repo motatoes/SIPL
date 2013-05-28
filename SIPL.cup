@@ -36,7 +36,7 @@ terminal 	String	IDEN;
 terminal    String NUMBER;
 
 
-/** ============== NON TERMINAL ===================== **/
+/** ============== NON TERMINALS ===================== **/
 
 non terminal 	Node		Program, Declarations, Block,  Command,Other_Commands, Assignment, 								Sequence, Conditional;
 
@@ -44,6 +44,7 @@ non terminal	Node		Looping, Loop_Body, Input, Output;
 non terminal	Node		Int_Expression;
 non terminal 	Node		Bool_Expression;
 non terminal 	Node	 	Bool_Negate;
+non terminal 	Node	 	Bool_Paren;
 non terminal 	Node	 	Else_Stmt;
 
 non terminal 	Node		Expr_Terminal;
@@ -67,14 +68,14 @@ Program ::= Block:b
 		:};
 
 
-/* Block production */
+/* Block production  */
 Block	::= BEGIN Declarations:dec 
 		{: parser.Temp= null;parser.Temp= null; :}
 		   Command:com END 
 		{: RESULT =  new Node("block","",false, dec,com ); :};
 
 
-/* Declarations production */
+/* Declarations production 
 Declarations	::=  VAR IDEN:iden 
 				{:
 				parser.Temp = new Node("declaration","",false,
@@ -83,6 +84,15 @@ Declarations	::=  VAR IDEN:iden
 				:}	 
 				SEMI Declarations:dec
 				{: RESULT = parser.Temp;  :}
+				| {: RESULT = parser.Temp ; :};
+				{: RESULT = parser.Temp;  :}
+*/
+Declarations	::=  VAR IDEN:iden SEMI Declarations:dec
+				{:
+				parser.Temp = new Node("declaration","",false,
+					 		  new Node("iden", iden, false), dec );
+				RESULT = parser.Temp;
+				:}	 
 				| {: RESULT = parser.Temp ; :};
 
 
@@ -243,20 +253,28 @@ Bool_Expression	::=
 				:}
 				| Bool_Negate:ne {:	RESULT = ne; :};
 
+Bool_Paren ::= LPAREN Bool_Expression:be RPAREN
+		  {:
+		  	RESULT = new Node("BRACETS", "", false, be);
+		  :};
 
 /* Bool_Negate production */
 Bool_Negate	::= TRUE {: RESULT = new Node("true","",false); :} 
-				| FALSE 
-				{:RESULT = new Node("false","" , false); :} 
-				| NOT Bool_Expression:bn 
-				{: RESULT = new Node("not", "" , false,	bn ); :} 
-				| Relop_Expression:re {: RESULT = re; :} ;
+			   |FALSE{:RESULT=new Node("false","" , false); :} 
+			   | NOT Bool_Expression:bn 
+			   {: RESULT = new Node("not", "" , false,	bn );   
+			   :} 
+			   | Relop_Expression:re {: RESULT = re; :} ;
 
 
 /* Relop_Epression production */
-Relop_Expression::= 
-				Relop_Terminal:re Relop_Op:ro Relop_Terminal:rt 
-				{:RESULT = new Node(ro,"" , false, re, rt ); :} ;
+Relop_Expression ::= 
+			Relop_Terminal:rt1 Relop_Op:ro Relop_Terminal:rt2
+				{:
+					RESULT = new Node(ro,"" , false, rt1, rt2) ;
+				:} 
+				| Bool_Paren:bp {: RESULT = bp; :};
+				
 
 
 
@@ -265,7 +283,7 @@ Relop_Terminal	::= Int_Expression:ie {: RESULT = ie; :};
 
 
 /* Relop_Op */
-Relop_Op		::= EQEQ {: RESULT = "eqeq"; :} 
+Relop_Op		::=	  EQEQ {: RESULT = "eqeq"; :} 
 					| LTHAN {: RESULT = "lthan"; :} 
 					| GTHAN {: RESULT = "gthan"; :}
 					| LTHANEQ {: RESULT = "lthaneq"; :}

@@ -1,6 +1,8 @@
 begin
 	var a ;
 	var b ;
+	var c ;
+	var d ;
 	input a ;
 	input b ;
 	if ( a == 0 ) then

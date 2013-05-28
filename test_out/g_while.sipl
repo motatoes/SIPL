@@ -1,7 +1,0 @@
-begin
-    while ( ( 1 < 2 ) ) do
-    begin
-        a := 1 ; 
-    end
-end
-

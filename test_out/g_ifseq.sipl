@@ -1,8 +1,0 @@
-begin
-    if ( ( 1 < 2 ) ) then
-    begin
-        a := 1 ; 
-    end
-    outsideIf := 2 ; 
-end
-

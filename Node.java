@@ -86,7 +86,7 @@ public class Node {
 			            temp += rightChild.dump_program_dummy(indent); 
 		        	}
 	        		indent--;
-	        		temp += getIndent(indent) + "end\n";
+	        		temp += "\n" + getIndent(indent) + "end";
 	        		break;
 
 	        	case "declaration":
@@ -121,6 +121,7 @@ public class Node {
 		        case "seq":
 			        if(leftChild!=null) {
 			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " ;\n";
 
 			        }
 			        if(rightChild!=null) {	
@@ -133,7 +134,7 @@ public class Node {
 	 		        temp += getIndent(indent) + "input ";
 			        if(leftChild!=null) {
 			            temp += leftChild.dump_program_dummy(indent); 
-			            temp += " ; \n";
+			            //temp += " ; \n";
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
@@ -145,7 +146,7 @@ public class Node {
 	 		        temp += getIndent(indent) + "output ";
 			        if(leftChild!=null) {
 			            temp += leftChild.dump_program_dummy(indent); 
-			            temp += " ; \n";
+			            //temp += " ; \n";
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
@@ -161,7 +162,7 @@ public class Node {
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
-			            temp += " ; \n";
+			            //temp += " ; \n";
 		        	}		        	
 		        	break;
  		        case "BRACETS":
@@ -172,7 +173,7 @@ public class Node {
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
-			            temp += " ; \n";
+			            //temp += " ; \n";
 		        	}		        	
 		        	break;		        	
  		        case "EPLUS":
@@ -246,7 +247,7 @@ public class Node {
 		        	break;	
 
  		        case "ifbody":
-	 		        temp += getIndent(indent) + "begin\n";
+	 		        //temp += getIndent(indent) + "begin\n";
 	 		        indent ++;
 			        if(leftChild!=null) {
 			        	
@@ -257,12 +258,12 @@ public class Node {
 			            temp += rightChild.dump_program_dummy(indent); 
 		        	}	
 		        	indent--;
-		            temp += getIndent(indent) + "end\n";
+		            //temp += "\n";
 		        	break;	
 
  		        case "elsebody":
-	 		        temp += getIndent(indent) + "else\n";
-	 		        temp +=  getIndent(indent) + "begin\n ";
+	 		        temp += "\n" + getIndent(indent) + "else";
+	 		        temp += "\n";
 	 		        indent ++ ;
 			        if(leftChild!=null) {
 			            temp += leftChild.dump_program_dummy(indent); 
@@ -272,7 +273,7 @@ public class Node {
 			            temp += rightChild.dump_program_dummy(indent); 
 		        	}	
 		        	indent --;
-		            temp += getIndent(indent) + "end\n";
+		            //temp += getIndent(indent) + "end\n";
 		        	break;	
 
 		        case "true":
@@ -299,6 +300,18 @@ public class Node {
 		        	}	
 		        	break;	
 
+		        case "not":
+	 		        temp += " ( ";
+	 		        temp += " not ";
+			        if(leftChild!=null) {
+			            temp += leftChild.dump_program_dummy(indent); 
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+		        	}	
+	 		        temp += " ) ";
+		        	break;	
+
 		        case "eqeq":
 	 		        temp += "( ";
 			        if(leftChild!=null) {
@@ -308,7 +321,20 @@ public class Node {
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
-		            temp += " )";
+			            temp += " )";
+		        	}	
+		        	break;	
+
+		        case "noteq":
+	 		        temp += "( ";
+			        if(leftChild!=null) {
+			        	temp += "";
+			            temp += leftChild.dump_program_dummy(indent); 
+			            temp += " != ";
+			        }
+			        if(rightChild!=null) {	
+			            temp += rightChild.dump_program_dummy(indent); 
+			            temp += " )";
 		        	}	
 		        	break;	
 
@@ -408,13 +434,11 @@ public class Node {
 			        	temp += "( ";
 			            temp += leftChild.dump_program_dummy(indent); 
 			            temp += " ) do\n";
-						temp += getIndent(indent) + "begin\n";
 						indent ++ ;
 			        }
 			        if(rightChild!=null) {	
 			            temp += rightChild.dump_program_dummy(indent); 
 			            indent --;
-		            	temp += getIndent(indent) + "end\n";
 		        	}	
 		        	break;	
 
